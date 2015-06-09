@@ -8,9 +8,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.howgoyeah.MainActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/ray"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="22dp"
+        android:text="ray" />
+
+    <Button
+        android:id="@+id/outxian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ray"
+        android:layout_marginLeft="88dp"
+        android:text="outxian" />
+
+    <Button
+        android:id="@+id/howgo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/outxian"
+        android:layout_marginLeft="88dp"
+        android:text="howgo" />
+
+    <Button
+        android:id="@+id/sin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/howgo"
+        android:layout_marginLeft="88dp"
+        android:text="sin" />
 
 </RelativeLayout>
