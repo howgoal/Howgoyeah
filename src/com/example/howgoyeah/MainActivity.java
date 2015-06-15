@@ -1,6 +1,9 @@
 package com.example.howgoyeah;
 
+import com.example.howgoyeah.game.CanvasActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +16,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 	Button outxian;
 	Button sin;
 	Button howgo;
+	Button allGame;
 	
 	
 
@@ -24,11 +28,13 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 		outxian = (Button) findViewById(R.id.outxian);
 		sin = (Button) findViewById(R.id.sin);
 		howgo = (Button) findViewById(R.id.howgo);
+		allGame = (Button) findViewById(R.id.allGame);
 		
 		ray.setOnClickListener(this);
 		outxian.setOnClickListener(this);
 		sin.setOnClickListener(this);
 		howgo.setOnClickListener(this);
+		allGame.setOnClickListener(this);
 		
 	}
 
@@ -55,8 +61,16 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
+		case R.id.allGame:
+			Log.v("allGame", "allGame block");
+			Intent intent = new Intent();
+			intent.setClass(MainActivity.this, CanvasActivity.class);
+			startActivity(intent); 
+			MainActivity.this.finish();
+			break;
 		case R.id.ray:
 			Log.v("ray", "ray block");
+			
 			break;
 		case R.id.outxian:
 			Log.v("outxian", "outxian block");
