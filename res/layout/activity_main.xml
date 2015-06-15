@@ -9,16 +9,6 @@
     tools:context="com.example.howgoyeah.MainActivity" >
 
     <Button
-        android:id="@+id/ray"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="88dp"
-        android:layout_marginTop="22dp"
-        android:text="ray" />
-
-    <Button
         android:id="@+id/outxian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,5 +34,22 @@
         android:layout_below="@+id/howgo"
         android:layout_marginLeft="88dp"
         android:text="sin" />
+
+    <Button
+        android:id="@+id/ray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/outxian"
+        android:layout_below="@+id/allGame"
+        android:text="ray" />
+
+    <Button
+        android:id="@+id/allGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ray"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:text="allGame" />
 
 </RelativeLayout>
