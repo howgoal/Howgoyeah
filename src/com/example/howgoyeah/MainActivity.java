@@ -1,6 +1,7 @@
 package com.example.howgoyeah;
 
 import com.example.howgoyeah.game.CanvasActivity;
+import com.example.howgoyeah.howgo.TouchActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -77,6 +78,10 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			break;
 		case R.id.howgo:
 			Log.v("howgo", "howgo block");
+			Intent intent_howgo = new Intent();
+			intent_howgo.setClass(MainActivity.this, TouchActivity.class);
+			startActivity(intent_howgo); 
+			MainActivity.this.finish();
 			break;
 		case R.id.sin:
 			Log.v("sin", "sin block");

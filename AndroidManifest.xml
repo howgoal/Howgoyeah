@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".game.CanvasActivity"></activity>
+        <activity android:name=".howgo.TouchActivity"></activity>
     </application>
 
 </manifest>
