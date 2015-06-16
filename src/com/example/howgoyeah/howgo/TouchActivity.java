@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import com.example.howgoyeah.R;
 
+import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.os.Bundle;
@@ -22,39 +23,48 @@ public class TouchActivity extends Activity {
 	ImageButton button1, button2, button3, button4, button5, button6, button7,
 			button8, button9, button0;
 
-	TextView phone_number;
-	StringBuffer sb = new StringBuffer("Test");
+	TextView show_phone_number,show_count;
 	private Timer timer;
 	private int gasGame = 500;
+	int true_count = 0;
+	int call_number_count = 0;
 
 	ArrayList<Integer> number = new ArrayList<Integer>();
 	String total = "";
 
-	Random randomGenerator = new Random();
+
 	Random rand = new Random(System.currentTimeMillis());
-	int pos = (int)(rand.nextDouble()*10);
-
-	int randomInt = randomGenerator.nextInt();
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_touch);
 		init();
-		number.add(3);
-		number.add(9);
-		number.add(6);
-
+		
 		timer = new Timer();
 		timer.schedule(timerTaskGame, 0, gasGame);
+		create_phone_number();
+		create_string();
 	}
 
+	public void create_phone_number(){
+		number.clear();
+		number.add(0);
+		number.add(9);
+		for(int i=0;i<8;i++){
+			int pos = (int)(rand.nextDouble()*10);
+			number.add(pos);
+		}
+	}
 	private TimerTask timerTaskGame = new TimerTask() {
 
 		@Override
+		
 		public void run() {
-			Random rand = new Random(System.currentTimeMillis());
-			int pos = (int)(rand.nextDouble()*10);
-			number.add(pos);
+			if(check_all() == true){
+				create_phone_number();
+				create_string();
+			}
+//			int pos = (int)(rand.nextDouble()*10);
+//			number.add(pos);
 			canvasHandler.sendMessage(new Message());
 			// TODO Auto-generated method stub
 
@@ -66,7 +76,8 @@ public class TouchActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			phone_number.setText(create_string());
+			show_phone_number.setText(create_string());
+			show_count.setText(Integer.toString(call_number_count));
 		}
 	};
 
@@ -81,9 +92,19 @@ public class TouchActivity extends Activity {
 	public void check(int press) {
 		if (press == number.get(0)) {
 			number.remove(0);
+			true_count++;
 			// return true;
 		} else {
 			// return false;
+		}
+	}
+	public boolean check_all(){
+		if(true_count == 10){
+			true_count = 0;
+			call_number_count++;
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -99,7 +120,8 @@ public class TouchActivity extends Activity {
 		button9 = (ImageButton) findViewById(R.id.imageButton9);
 		button0 = (ImageButton) findViewById(R.id.imageButton0);
 
-		phone_number = (TextView) findViewById(R.id.show_phone_number);
+		show_phone_number = (TextView) findViewById(R.id.show_phone_number);
+		show_count = (TextView) findViewById(R.id.show_count);
 
 		button1.setOnClickListener(btnListener);
 		button2.setOnClickListener(btnListener);
@@ -119,21 +141,13 @@ public class TouchActivity extends Activity {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.imageButton1:
-				// phone_number.setText("1");
-				// sb.append(String.valueOf(randomInt));
 				check(1);
-				// phone_number.setText(create_string());
-				// /phone_number.setVisibility(View.VISIBLE);
 				break;
 			case R.id.imageButton2:
 				check(2);
-				// phone_number.setVisibility(View.VISIBLE);
-				// phone_number.setVisibility(View.VISIBLE);
 				break;
 			case R.id.imageButton3:
 				check(3);
-				// phone_number.setVisibility(View.VISIBLE);
-				// phone_number.setVisibility(View.VISIBLE);
 				break;
 			case R.id.imageButton4:
 				check(4);
