@@ -2,6 +2,7 @@ package com.example.howgoyeah;
 
 import com.example.howgoyeah.game.CanvasActivity;
 import com.example.howgoyeah.howgo.TouchActivity;
+import com.example.howgoyeah.shake.ShakeActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -75,6 +76,10 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			break;
 		case R.id.outxian:
 			Log.v("outxian", "outxian block");
+			Intent intent_shake = new Intent();
+			intent_shake.setClass(MainActivity.this, ShakeActivity.class);
+			startActivity(intent_shake);
+			MainActivity.this.finish();
 			break;
 		case R.id.howgo:
 			Log.v("howgo", "howgo block");
