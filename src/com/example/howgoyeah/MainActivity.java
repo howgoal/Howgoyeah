@@ -2,6 +2,7 @@ package com.example.howgoyeah;
 
 import com.example.howgoyeah.game.CanvasActivity;
 import com.example.howgoyeah.howgo.TouchActivity;
+import com.example.howgoyeah.look.LookActivity;
 import com.example.howgoyeah.shake.ShakeActivity;
 
 import android.app.Activity;
@@ -72,7 +73,10 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			break;
 		case R.id.ray:
 			Log.v("ray", "ray block");
-			
+			Intent intent_look = new Intent();
+			intent_look.setClass(MainActivity.this, LookActivity.class);
+			startActivity(intent_look);
+			MainActivity.this.finish();
 			break;
 		case R.id.outxian:
 			Log.v("outxian", "outxian block");

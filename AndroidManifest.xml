@@ -25,6 +25,7 @@
         <activity android:name=".game.CanvasActivity"></activity>
         <activity android:name=".howgo.TouchActivity"></activity>
         <activity android:name=".shake.ShakeActivity"></activity>
+        <activity android:name=".look.LookActivity"></activity>
     </application>
 
 </manifest>

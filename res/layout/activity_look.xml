@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<TableLayout 
+        android:id="@+id/queslayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+	    <TableRow >
+	        
+	        <ImageView 
+	            android:id="@+id/QuesChoice"
+	            android:layout_width="200dp"
+	            android:layout_height="100dp"/>
+	        
+	    </TableRow>
+        <TableRow>
+            
+            <ImageView 
+        		android:id="@+id/QuesPicture"
+        		android:layout_width="200dp"
+        		android:layout_height="200dp" />
+        </TableRow>
+        
+        <TableRow>
+            <LinearLayout>
+                <ImageButton 
+            	android:id="@+id/button_red"
+            	android:layout_width="50dp"
+            	android:layout_height="50dp"
+            	android:src="@drawable/ans_red" />
+        
+	        <ImageButton 
+	            android:id="@+id/button_orange"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_orange"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_yellow"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_yellow"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_green"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_green"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_blue"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_blue"/>
+            </LinearLayout>
+            
+        </TableRow>"
+        
+        <TableRow >
+            <LinearLayout>
+                
+	        <ImageButton 
+	            android:id="@+id/button_purple"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_purple"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_black"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_black"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_white"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_white"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_gray"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_gray"/>
+	        
+	        <ImageButton 
+	            android:id="@+id/button_brown"
+	            android:layout_width="50dp"
+	            android:layout_height="50dp"
+	            android:src="@drawable/ans_brown"/>
+            </LinearLayout>
+            
+        </TableRow>
+        
+        <TableRow >
+            <TextView 
+                android:id="@+id/countcorrect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
