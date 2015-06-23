@@ -4,12 +4,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.zip.Inflater;
 
+import com.example.howgoyeah.MainActivity;
 import com.example.howgoyeah.R;
 import com.example.howgoyeah.R.layout;
 import com.example.howgoyeah.R.menu;
 import com.example.howgoyeah.exampleGame.GameOverMode;
 import com.example.howgoyeah.exampleGame.OneMode;
 import com.example.howgoyeah.exampleGame.TwoMode;
+import com.example.howgoyeah.howgo.TouchActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -56,6 +58,21 @@ public class CanvasActivity extends Activity {
 
 		return super.onCreateOptionsMenu(menu);
 	}
+	
+	
+	protected void onActivityResult(int requestCode, int resultCode , Intent data) {
+
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            String result= data.getStringExtra("result");
+	            Log.v("touch_grade2", result);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}//onActivityResult
+	
 	private TimerTask  timerTaskGame = new TimerTask() {
 		@Override
 		public void run() {
@@ -83,6 +100,10 @@ public class CanvasActivity extends Activity {
 			case 4:
 				Log.v("set4","4Mode");
 				mode+=1;
+				Intent i = new Intent();
+				i.setClass(CanvasActivity.this, TouchActivity.class);
+				startActivityForResult(i, 1);
+				
 				break;
 			case 5:
 				gameController.setCurrentModeGame(new GameOverMode());
