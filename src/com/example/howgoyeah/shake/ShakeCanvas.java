@@ -1,8 +1,5 @@
 package com.example.howgoyeah.shake;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.example.howgoyeah.R;
 
 import android.content.Context;
@@ -18,9 +15,6 @@ import android.view.View;
 
 public class ShakeCanvas extends View {
 
-	private Long startTime;
-	public Long seconds;
-	private Handler handler = new Handler();
 	//private int gasGame = 500;
 	private int mode = 0;
 	private Paint paint;
@@ -30,30 +24,9 @@ public class ShakeCanvas extends View {
 		// TODO Auto-generated constructor stub
 
 		paint = new Paint();
-		paint.setAntiAlias(true); // remove edge effect
-		
-		//setTimer();
-		startTime = System.currentTimeMillis();
-		handler.postDelayed(updateTimer, 1000); // start timer
+		paint.setAntiAlias(true); // remove edge effect	
 	}
 
-	
-	private Runnable updateTimer = new Runnable() {
-        public void run() {
-            Long spentTime = System.currentTimeMillis() - startTime;
-            //計算目前已過秒數
-            seconds = (spentTime/1000) % 60;
-            
-            if(seconds > 30) {
-            	handler.removeCallbacks(updateTimer); // stop timer
-            } else {
-            	invalidate(); // do onDraw()
-                //Log.i("run", "><");
-                handler.postDelayed(this, 1000);
-            } 
-        }
-    };
-	
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -70,9 +43,12 @@ public class ShakeCanvas extends View {
 				R.drawable.power_three);
 		Bitmap power4 = BitmapFactory
 				.decodeResource(res, R.drawable.power_four);
+		Bitmap back = BitmapFactory.decodeResource(res, R.drawable.orange_back);
+		
+		canvas.drawBitmap(back, 0, 0, paint);
 
 		if (mode < 50) {
-			canvas.drawBitmap(power1, 0, 0, paint);
+			canvas.drawBitmap(power1, canvas.getWidth()/2-160, canvas.getHeight()/10, paint);
 		} else if (mode < 100) {
 			canvas.drawBitmap(power2, 0, 0, paint);
 
@@ -86,10 +62,19 @@ public class ShakeCanvas extends View {
 		counterPaint.setColor(Color.BLACK);
 		counterPaint.setTextSize(50);
 		
-		canvas.drawText("經過時間: " + String.valueOf(seconds), 60, 400, counterPaint);
-		canvas.drawText("搖動次數: " + String.valueOf(mode), 60, 500, counterPaint);
+		Paint notePaint = new Paint();
+		notePaint.setColor(Color.BLACK);
+		notePaint.setTextSize(20);
+		
+		canvas.drawText("Passing time: " + String.valueOf(ShakeActivity.tmp_seconds), 70, 400, counterPaint);
+		canvas.drawText("Shake times: " + String.valueOf(mode), 70, 500, counterPaint);
+		canvas.drawText("快來幫皮卡丘充飽電><", 30, 50, notePaint);
+		
 		//Log.i("second", String.valueOf(seconds));
-
+		
+		if(ShakeActivity.stopTimer == false) {
+			invalidate();
+		}
 	}
 
 }

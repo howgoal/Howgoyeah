@@ -1,86 +1,140 @@
 package com.example.howgoyeah.shake;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.locks.Condition;
-
 import com.example.howgoyeah.R;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ShakeActivity extends Activity{
-	private SensorManager mSensorManager; // 擃��(Sensor)雿輻蝞∠��
-	private Sensor mSensor; // 擃��(Sensor)憿
-	private float mLastX; // x頠賊���(Sensor)��宏
-	private float mLastY; // y頠賊���(Sensor)��宏
-	private float mLastZ; // z頠賊���(Sensor)��宏
-	private double mSpeed; // �����摨�
-	private long mLastUpdateTime; // 閫貊����
-	
-	//private TextView show;
+public class ShakeActivity extends Activity {
+	private SensorManager mSensorManager;
+	private Sensor mSensor;
+	private float mLastX;
+	private float mLastY;
+	private float mLastZ;
+	private double mSpeed;
+	private long mLastUpdateTime;
+
+	// private TextView show;
 	private int counter = 0;
 	public static int condition = 0;
+	public static boolean stopTimer = false;
+	public static int tmp_seconds = 30;
+	private Long startTime;
+	public Long seconds;
+	private Handler handler = new Handler();
+	
+	private TextView shake;
+	private TextView time;
+	private ImageView pika;	
 
-	// �����摨西身摰�� (��潸�之������之����潸��������孛�)
 	private static final int SPEED_SHRESHOLD = 4000;
 
-	// 閫貊������
 	private static final int UPTATE_INTERVAL_TIME = 70;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		ShakeCanvas canvas = new ShakeCanvas(this);
-		setContentView(canvas);
-		//setContentView(R.layout.activity_shake);	
+		
+		getActionBar().hide();
 
-		// ������(Sensor)���蝙�甈��
+		ShakeCanvas canvas = new ShakeCanvas(this);
+		//setContentView(canvas);
+		setContentView(R.layout.activity_shake);
+
+		
 		mSensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
-		// �����ensor����身摰�
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-		// 閮餃����(Sensor)���孛�Listener
+		
 		mSensorManager.registerListener(SensorListener, mSensor,
 				SensorManager.SENSOR_DELAY_GAME);
+
+		time = (TextView) findViewById(R.id.time_data);
+		shake = (TextView) findViewById(R.id.shake_data);
+		pika = (ImageView) findViewById(R.id.pika);
 		
-		//show = (TextView) findViewById(R.id.show);
+
+		// setTimer();
+		startTime = System.currentTimeMillis();
+		handler.postDelayed(updateTimer, 1000); // start timer
 	}
 	
 
+	private Runnable updateTimer = new Runnable() {
+		public void run() {
+			Long spentTime = System.currentTimeMillis() - startTime;
+			seconds = (spentTime / 1000) % 60;
+
+			if (seconds > 30) {
+				handler.removeCallbacks(updateTimer); // stop timer
+//				new AlertDialog.Builder(ShakeActivity.this)
+//			    .setTitle("休息一下")
+//			    .setMessage("總計搖動次數為: " + String.valueOf(condition) + "\n3秒後即自動開始下個挑戰囉~")
+//			    .show();
+//				if(seconds > 33) {
+//					stopTimer = true;
+//					ShakeActivity.this.finish();
+//					Log.i("><", "123456");
+//				}	
+				ShakeActivity.this.finish();
+			} else {
+				tmp_seconds = 30 - Integer.parseInt(seconds.toString());
+				time.setText(String.valueOf(tmp_seconds));
+				shake.setText(String.valueOf(condition));
+				// invalidate(); // do onDraw()
+				stopTimer = false;
+				checkImage();
+				// Log.i("run", "><");
+				handler.postDelayed(this, 1000);
+			}
+		}
+	};
+	
+	private void checkImage() {
+		if(condition < 50) {
+			
+		} else if(condition < 100) {
+			pika.setImageResource(R.drawable.power_two);
+		} else if(condition < 150) {
+			pika.setImageResource(R.drawable.power_three);
+		} else {
+			pika.setImageResource(R.drawable.power_four);
+		}
+	}
+
 	private SensorEventListener SensorListener = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent mSensorEvent) {
-			// ���孛�����
+
 			long mCurrentUpdateTime = System.currentTimeMillis();
 
-			// 閫貊������ = ���孛����� - 銝活閫貊����
 			long mTimeInterval = mCurrentUpdateTime - mLastUpdateTime;
 
-			// �閫貊������< 70 ��eturn;
 			if (mTimeInterval < UPTATE_INTERVAL_TIME)
 				return;
 
 			mLastUpdateTime = mCurrentUpdateTime;
 
-			// ���yz擃��(Sensor)��宏
 			float x = mSensorEvent.values[0];
 			float y = mSensorEvent.values[1];
 			float z = mSensorEvent.values[2];
 
-			// ����宏�漲 = xyz擃��(Sensor)��宏 - 銝活xyz擃��(Sensor)��宏
 			float mDeltaX = x - mLastX;
 			float mDeltaY = y - mLastY;
 			float mDeltaZ = z - mLastZ;
@@ -89,17 +143,16 @@ public class ShakeActivity extends Activity{
 			mLastY = y;
 			mLastZ = z;
 
-			// 擃��(Sensor)������漲�撘�
 			mSpeed = Math.sqrt(mDeltaX * mDeltaX + mDeltaY * mDeltaY + mDeltaZ
 					* mDeltaZ)
 					/ mTimeInterval * 10000;
 
-			// �擃��(Sensor)����漲憭扳蝑���身摰�澆��脣 (���������漲)
+
 			if (mSpeed >= SPEED_SHRESHOLD) {
-				// ����������������
+				
 				counter++;
-				//Log.e(String.valueOf(counter), "shake");
-				//show.setText(String.valueOf(counter));
+				// Log.e(String.valueOf(counter), "shake");
+				// show.setText(String.valueOf(counter));
 				condition = counter;
 			}
 		}
@@ -107,14 +160,15 @@ public class ShakeActivity extends Activity{
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 	};
+
 	
-	@Override
 	protected void onDestroy() 
 	{
 	        super.onDestroy();
-	        //�蝔����宏�擃��(Sensor)閫貊
+	        
 	        mSensorManager.unregisterListener(SensorListener);
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

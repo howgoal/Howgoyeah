@@ -1,5 +1,10 @@
 package com.example.howgoyeah.game;
 
+import com.example.howgoyeah.exampleGame.GameOverMode;
+import com.example.howgoyeah.exampleGame.OneMode;
+import com.example.howgoyeah.exampleGame.TwoMode;
+import com.example.howgoyeah.shake.ShakeActivity;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.zip.Inflater;
@@ -63,7 +68,7 @@ public class CanvasActivity extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode , Intent data) {
 
-	    if (requestCode == 1) {
+	    if (requestCode == 4) {
 	        if(resultCode == RESULT_OK){
 	            String result= data.getStringExtra("result");
 	            Log.v("touch_grade2", result);
@@ -75,6 +80,14 @@ public class CanvasActivity extends Activity {
 	    }else if(requestCode==2){
 	        if(resultCode == RESULT_OK){
 	            String result= data.getStringExtra("result");
+	            Log.v("lookscore", result);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }else if(requestCode==3){
+	        if(resultCode == RESULT_OK){
+	            String result= String.valueOf(ShakeActivity.condition);
 	            Log.v("lookscore", result);
 	        }
 	        if (resultCode == RESULT_CANCELED) {
@@ -108,7 +121,14 @@ public class CanvasActivity extends Activity {
 				break;
 			case 3:
 				Log.v("set3","3Mode");
+				
+//				int shake_times = ShakeActivity.condition;
+//				Log.v(String.valueOf(shake_times), "shake_times");
 				mode+=1;
+				
+				Intent shakescore = new Intent();
+				shakescore.setClass(CanvasActivity.this, ShakeActivity.class);
+				startActivityForResult(shakescore, 3);
 				break;
 			case 4:
 				Log.v("set4","4Mode");
