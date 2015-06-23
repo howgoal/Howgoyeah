@@ -1,4 +1,4 @@
-package com.example.howgoyeah.shake;
+package howgoyeah.shake;
 
 import com.example.howgoyeah.R;
 
@@ -85,8 +85,8 @@ public class ShakeActivity extends Activity {
 			if (seconds > 30) {
 				handler.removeCallbacks(updateTimer); // stop timer
 //				new AlertDialog.Builder(ShakeActivity.this)
-//			    .setTitle("ä¼‘æ¯ä¸€ä¸‹")
-//			    .setMessage("ç¸½è¨ˆæ–å‹•æ¬¡æ•¸ç‚º: " + String.valueOf(condition) + "\n3ç§’å¾Œå³è‡ªå‹•é–‹å§‹ä¸‹å€‹æŒ‘æˆ°å›‰~")
+//			    .setTitle("ä¼‘æ¯ä¸?ä¸?")
+//			    .setMessage("ç¸½è?ˆæ?–å?•æ¬¡?•¸?‚º: " + String.valueOf(condition) + "\n3ç§’å?Œå³?‡ª??•é?‹å?‹ä?‹å?‹æ?‘æˆ°??‰~")
 //			    .show();
 //				if(seconds > 33) {
 //					stopTimer = true;

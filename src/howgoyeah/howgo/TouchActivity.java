@@ -1,4 +1,4 @@
-package com.example.howgoyeah.howgo;
+package howgoyeah.howgo;
 
 import java.util.ArrayList;
 import java.util.Random;
