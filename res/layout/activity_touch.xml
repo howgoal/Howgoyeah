@@ -177,12 +177,28 @@
             android:weightSum="10" >
 
             <TextView
+                android:id="@+id/time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="目前秒數："
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/show_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
                 android:id="@+id/number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="6"
+                android:layout_weight="4"
                 android:gravity="center"
-                android:text="已撥打號碼"
+                android:text="已完成字數"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="22sp" />
 
@@ -191,7 +207,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="4"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="0"
                 android:textAppearance="?android:attr/textAppearanceMedium"
