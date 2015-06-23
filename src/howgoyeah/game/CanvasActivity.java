@@ -3,6 +3,7 @@ package howgoyeah.game;
 import howgoyeah.exampleGame.GameOverMode;
 import howgoyeah.exampleGame.OneMode;
 import howgoyeah.exampleGame.TwoMode;
+import howgoyeah.shake.ShakeActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,6 +74,9 @@ public class CanvasActivity extends Activity {
 				break;
 			case 3:
 				Log.v("set3","3Mode");
+				
+				int shake_times = ShakeActivity.condition;
+				Log.v(String.valueOf(shake_times), "shake_times");
 				mode+=1;
 				break;
 			case 4:

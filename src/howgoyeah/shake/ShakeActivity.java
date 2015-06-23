@@ -1,87 +1,138 @@
 package howgoyeah.shake;
 
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.locks.Condition;
-
 import com.example.howgoyeah.R;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ShakeActivity extends Activity{
-	private SensorManager mSensorManager; // é«”æ??(Sensor)ä½¿ç”¨ç®¡ç??
-	private Sensor mSensor; // é«”æ??(Sensor)é¡åˆ¥
-	private float mLastX; // xè»¸é?”æ??(Sensor)??ç§»
-	private float mLastY; // yè»¸é?”æ??(Sensor)??ç§»
-	private float mLastZ; // zè»¸é?”æ??(Sensor)??ç§»
-	private double mSpeed; // ?”©??•å?›é?“æ•¸åº?
-	private long mLastUpdateTime; // è§¸ç™¼??‚é??
-	
-	//private TextView show;
+public class ShakeActivity extends Activity {
+	private SensorManager mSensorManager;
+	private Sensor mSensor;
+	private float mLastX;
+	private float mLastY;
+	private float mLastZ;
+	private double mSpeed;
+	private long mLastUpdateTime;
+
+	// private TextView show;
 	private int counter = 0;
 	public static int condition = 0;
+	public static boolean stopTimer = false;
+	public static int tmp_seconds = 30;
+	private Long startTime;
+	public Long seconds;
+	private Handler handler = new Handler();
+	
+	private TextView shake;
+	private TextView time;
+	private ImageView pika;
+	
 
-	// ?”©??•å?›é?“æ•¸åº¦è¨­å®šå?? (?•¸?¼è?Šå¤§???”©??•è?Šå¤§??›ï?Œæ•¸?¼è?Šå?è?•è?•ç”©??•å³??ƒè§¸?™¼)
 	private static final int SPEED_SHRESHOLD = 4000;
-
-	// è§¸ç™¼??“é?”æ?‚é??
 	private static final int UPTATE_INTERVAL_TIME = 70;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ShakeCanvas canvas = new ShakeCanvas(this);
-		setContentView(canvas);
-		//setContentView(R.layout.activity_shake);	
+		getActionBar().hide();
 
-		// ??–å?—é?”æ??(Sensor)??å?™ä½¿?”¨æ¬Šé??
+		ShakeCanvas canvas = new ShakeCanvas(this);
+		//setContentView(canvas);
+		setContentView(R.layout.activity_shake);
+
 		mSensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
-		// ??–å?—æ?‹æ?ŸSensor????‹è¨­å®?
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-		// è¨»å?Šé?”æ??(Sensor)?”©??•è§¸?™¼Listener
 		mSensorManager.registerListener(SensorListener, mSensor,
 				SensorManager.SENSOR_DELAY_GAME);
+
+		time = (TextView) findViewById(R.id.time_data);
+		shake = (TextView) findViewById(R.id.shake_data);
+		pika = (ImageView) findViewById(R.id.pika);
 		
-		//show = (TextView) findViewById(R.id.show);
+
+		// setTimer();
+		startTime = System.currentTimeMillis();
+		handler.postDelayed(updateTimer, 1000); // start timer
 	}
 	
 
+	private Runnable updateTimer = new Runnable() {
+		public void run() {
+			Long spentTime = System.currentTimeMillis() - startTime;
+			seconds = (spentTime / 1000) % 60;
+
+			if (seconds > 30) {
+				handler.removeCallbacks(updateTimer); // stop timer
+//				new AlertDialog.Builder(ShakeActivity.this)
+//			    .setTitle("ä¼‘æ¯ä¸€ä¸‹")
+//			    .setMessage("ç¸½è¨ˆæ–å‹•æ¬¡æ•¸ç‚º: " + String.valueOf(condition) + "\n3ç§’å¾Œå³è‡ªå‹•é–‹å§‹ä¸‹å€‹æŒ‘æˆ°å›‰~")
+//			    .show();
+//				if(seconds > 33) {
+//					stopTimer = true;
+//					ShakeActivity.this.finish();
+//					Log.i("><", "123456");
+//				}	
+				ShakeActivity.this.finish();
+			} else {
+				tmp_seconds = 30 - Integer.parseInt(seconds.toString());
+				time.setText(String.valueOf(tmp_seconds));
+				shake.setText(String.valueOf(condition));
+				// invalidate(); // do onDraw()
+				stopTimer = false;
+				checkImage();
+				// Log.i("run", "><");
+				handler.postDelayed(this, 1000);
+			}
+		}
+	};
+	
+	private void checkImage() {
+		if(condition < 50) {
+			
+		} else if(condition < 100) {
+			pika.setImageResource(R.drawable.power_two);
+		} else if(condition < 150) {
+			pika.setImageResource(R.drawable.power_three);
+		} else {
+			pika.setImageResource(R.drawable.power_four);
+		}
+	}
+
 	private SensorEventListener SensorListener = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent mSensorEvent) {
-			// ?•¶??è§¸?™¼??‚é??
+
 			long mCurrentUpdateTime = System.currentTimeMillis();
 
-			// è§¸ç™¼??“é?”æ?‚é?? = ?•¶??è§¸?™¼??‚é?? - ä¸Šæ¬¡è§¸ç™¼??‚é??
 			long mTimeInterval = mCurrentUpdateTime - mLastUpdateTime;
 
-			// ?‹¥è§¸ç™¼??“é?”æ?‚é??< 70 ??‡return;
 			if (mTimeInterval < UPTATE_INTERVAL_TIME)
 				return;
 
 			mLastUpdateTime = mCurrentUpdateTime;
 
-			// ??–å?—xyzé«”æ??(Sensor)??ç§»
 			float x = mSensorEvent.values[0];
 			float y = mSensorEvent.values[1];
 			float z = mSensorEvent.values[2];
 
-			// ?”©??•å?ç§»?Ÿåº¦ = xyzé«”æ??(Sensor)??ç§» - ä¸Šæ¬¡xyzé«”æ??(Sensor)??ç§»
 			float mDeltaX = x - mLastX;
 			float mDeltaY = y - mLastY;
 			float mDeltaZ = z - mLastZ;
@@ -90,17 +141,14 @@ public class ShakeActivity extends Activity{
 			mLastY = y;
 			mLastZ = z;
 
-			// é«”æ??(Sensor)?”©??•å?›é?“é?Ÿåº¦?…¬å¼?
 			mSpeed = Math.sqrt(mDeltaX * mDeltaX + mDeltaY * mDeltaY + mDeltaZ
 					* mDeltaZ)
 					/ mTimeInterval * 10000;
 
-			// ?‹¥é«”æ??(Sensor)?”©??•é?Ÿåº¦å¤§æ–¼ç­‰æ–¼?”©??•è¨­å®šå?¼å?‡é?²å…¥ (??”åˆ°?”©??•å?›é?“å?Šé?Ÿåº¦)
 			if (mSpeed >= SPEED_SHRESHOLD) {
-				// ??”åˆ°??–ä???–ç”©??•å?Œè?å?šç?„ä?‹æ??
 				counter++;
-				//Log.e(String.valueOf(counter), "shake");
-				//show.setText(String.valueOf(counter));
+				// Log.e(String.valueOf(counter), "shake");
+				// show.setText(String.valueOf(counter));
 				condition = counter;
 			}
 		}
@@ -108,14 +156,14 @@ public class ShakeActivity extends Activity{
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 	};
-	
+
 	@Override
-	protected void onDestroy() 
-	{
-	        super.onDestroy();
-	        //?œ¨ç¨‹å?é?œé?‰æ?‚ç§»?™¤é«”æ??(Sensor)è§¸ç™¼
-	        mSensorManager.unregisterListener(SensorListener);
+	protected void onDestroy() {
+		super.onDestroy();
+		mSensorManager.unregisterListener(SensorListener);
+		
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
