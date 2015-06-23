@@ -1,4 +1,6 @@
-package com.example.howgoyeah;
+package howgoyeah.media;
+
+import com.example.howgoyeah.R;
 
 import android.app.Activity;
 import android.database.Cursor;

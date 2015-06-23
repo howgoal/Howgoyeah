@@ -54,7 +54,7 @@ public class SlideActivity extends Activity {
 			@Override
 			public void onTick(long millisUntilFinished) {
 				// TODO Auto-generated method stub
-				textTime.setText("�ɶ��˼�: " + millisUntilFinished / 1000);
+				textTime.setText("®É¶¡­Ë¼Æ: " + millisUntilFinished / 1000);
 			}
 
 		}.start();
@@ -79,7 +79,7 @@ public class SlideActivity extends Activity {
 			// TODO Auto-generated method stub
 			int x = scrollView.getScrollY();
 			x = x / 500;
-			textDis.setText("�Ʀ�Z��: " + x);
+			textDis.setText("·Æ¦æ¶ZÂ÷: " + x);
 			return false;
 		}
 	};

@@ -1,4 +1,4 @@
-package com.example.howgoyeah;
+package howgoyeah.media;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

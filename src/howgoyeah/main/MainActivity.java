@@ -3,12 +3,12 @@ package howgoyeah.main;
 import howgoyeah.game.CanvasActivity;
 import howgoyeah.howgo.TouchActivity;
 import howgoyeah.look.LookActivity;
+import howgoyeah.media.MediaPlayerService;
+import howgoyeah.media.RankActivity;
 import howgoyeah.shake.ShakeActivity;
 import howgoyeah.slide.SlideActivity;
 
-import com.example.howgoyeah.MediaPlayerService;
 import com.example.howgoyeah.R;
-import com.example.howgoyeah.RankActivity;
 
 import android.R.menu;
 import android.app.Activity;
