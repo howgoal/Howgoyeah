@@ -1,12 +1,10 @@
-package howgoyeah.main;
+package com.example.howgoyeah;
 
-import com.example.howgoyeah.R;
+import com.example.howgoyeah.game.CanvasActivity;
+import com.example.howgoyeah.howgo.TouchActivity;
+import com.example.howgoyeah.look.LookActivity;
+import com.example.howgoyeah.shake.ShakeActivity;
 
-import howgoyeah.game.CanvasActivity;
-import howgoyeah.howgo.TouchActivity;
-import howgoyeah.look.LookActivity;
-import howgoyeah.shake.ShakeActivity;
-import howgoyeah.slide.SlideActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -71,30 +69,31 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, CanvasActivity.class);
 			startActivity(intent); 
+			MainActivity.this.finish();
 			break;
 		case R.id.ray:
 			Log.v("ray", "ray block");
 			Intent intent_look = new Intent();
 			intent_look.setClass(MainActivity.this, LookActivity.class);
 			startActivity(intent_look);
+			MainActivity.this.finish();
 			break;
 		case R.id.outxian:
 			Log.v("outxian", "outxian block");
 			Intent intent_shake = new Intent();
 			intent_shake.setClass(MainActivity.this, ShakeActivity.class);
 			startActivity(intent_shake);
+			MainActivity.this.finish();
 			break;
 		case R.id.howgo:
 			Log.v("howgo", "howgo block");
 			Intent intent_howgo = new Intent();
 			intent_howgo.setClass(MainActivity.this, TouchActivity.class);
 			startActivity(intent_howgo); 
+			MainActivity.this.finish();
 			break;
 		case R.id.sin:
 			Log.v("sin", "sin block");
-			Intent intent_sin = new Intent();
-			intent_sin.setClass(MainActivity.this, SlideActivity.class);
-			startActivity(intent_sin); 
 			break;
 		default:
 			break;

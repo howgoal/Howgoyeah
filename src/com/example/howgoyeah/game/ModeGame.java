@@ -1,4 +1,4 @@
-package howgoyeah.game;
+package com.example.howgoyeah.game;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;

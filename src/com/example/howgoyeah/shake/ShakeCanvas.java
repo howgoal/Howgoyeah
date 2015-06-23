@@ -1,4 +1,4 @@
-package howgoyeah.shake;
+package com.example.howgoyeah.shake;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,7 +41,7 @@ public class ShakeCanvas extends View {
 	private Runnable updateTimer = new Runnable() {
         public void run() {
             Long spentTime = System.currentTimeMillis() - startTime;
-            //è¨ˆç?—ç›®??å·²??ç?’æ•¸
+            //è¨ˆç®—ç›®å‰å·²éç§’æ•¸
             seconds = (spentTime/1000) % 60;
             
             if(seconds > 30) {
@@ -86,8 +86,8 @@ public class ShakeCanvas extends View {
 		counterPaint.setColor(Color.BLACK);
 		counterPaint.setTextSize(50);
 		
-		canvas.drawText("ç¶“é?æ?‚é??: " + String.valueOf(seconds), 60, 400, counterPaint);
-		canvas.drawText("??–å?•æ¬¡?•¸: " + String.valueOf(mode), 60, 500, counterPaint);
+		canvas.drawText("ç¶“éæ™‚é–“: " + String.valueOf(seconds), 60, 400, counterPaint);
+		canvas.drawText("æ–å‹•æ¬¡æ•¸: " + String.valueOf(mode), 60, 500, counterPaint);
 		//Log.i("second", String.valueOf(seconds));
 
 	}

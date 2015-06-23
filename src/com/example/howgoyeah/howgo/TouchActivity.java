@@ -1,4 +1,4 @@
-package howgoyeah.howgo;
+package com.example.howgoyeah.howgo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,7 +41,7 @@ public class TouchActivity extends Activity {
 		
 		timer = new Timer();
 		timer.schedule(timerTaskGame, 0, gasGame);
-		create_phone_number();
+		//create_phone_number();
 		create_string();
 	}
 
@@ -59,12 +59,12 @@ public class TouchActivity extends Activity {
 		@Override
 		
 		public void run() {
-			if(check_all() == true){
-				create_phone_number();
-				create_string();
-			}
-//			int pos = (int)(rand.nextDouble()*10);
-//			number.add(pos);
+//			if(check_all() == true){
+//				create_phone_number();
+//				create_string();
+//			}
+			int pos = (int)(rand.nextDouble()*10);
+			number.add(pos);
 			canvasHandler.sendMessage(new Message());
 			// TODO Auto-generated method stub
 
@@ -92,7 +92,9 @@ public class TouchActivity extends Activity {
 	public void check(int press) {
 		if (press == number.get(0)) {
 			number.remove(0);
-			true_count++;
+			//true_count++;
+			call_number_count++;
+			show_count.setText(String.valueOf(call_number_count));
 			// return true;
 		} else {
 			// return false;
