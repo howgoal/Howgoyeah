@@ -1,8 +1,9 @@
-package com.example.howgoyeah.look;
+package howgoyeah.look;
+
+import howgoyeah.game.CanvasActivity;
+import howgoyeah.howgo.TouchActivity;
 
 import com.example.howgoyeah.R;
-import com.example.howgoyeah.game.CanvasActivity;
-import com.example.howgoyeah.howgo.TouchActivity;
 
 import android.R.layout;
 import android.app.Activity;
