@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="21" />
 
     <application
         android:allowBackup="true"
@@ -22,11 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="howgoyeah.game.CanvasActivity"></activity>
-        <activity android:name="howgoyeah.howgo.TouchActivity"></activity>
-        <activity android:name="howgoyeah.shake.ShakeActivity"></activity>
-        <activity android:name="howgoyeah.look.LookActivity"></activity>
+
+        <service android:name="MediaPlayerService" />
+
+        <activity android:name="howgoyeah.game.CanvasActivity" >
+        </activity>
+        <activity android:name="howgoyeah.howgo.TouchActivity" >
+        </activity>
+        <activity android:name="howgoyeah.shake.ShakeActivity" >
+        </activity>
+        <activity android:name="howgoyeah.look.LookActivity" >
+        </activity>
         <activity android:name="howgoyeah.slide.SlideActivity"></activity>
+>
     </application>
 
 </manifest>

@@ -180,7 +180,7 @@ public class LookActivity extends Activity {
 		ImageView QuesPicture = (ImageView) findViewById(R.id.QuesPicture);
 		ImageView QuesChoice = (ImageView) findViewById(R.id.QuesChoice);
 		TextView countcorrect = (TextView) findViewById(R.id.countcorrect);
-        countcorrect.setText(""+correct+"");
+        countcorrect.setText("目前答對題數:"+correct+"");
 		
 		switch (ques_picture) {
 		case 0:
@@ -221,7 +221,7 @@ public class LookActivity extends Activity {
 		answer = question[ques_picture][ques_choice];
 		
 
-		Toast.makeText(LookActivity.this,"Yeah"+ques_picture+"aaa"+ques_choice+"ha"+answer, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(LookActivity.this,"Yeah"+ques_picture+"aaa"+ques_choice+"ha"+answer, Toast.LENGTH_SHORT).show();
 	}
 	
 	
