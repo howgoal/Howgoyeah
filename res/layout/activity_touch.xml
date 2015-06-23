@@ -13,6 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_gravity="clip_vertical"
             android:layout_weight="3"
             android:orientation="vertical" >
 
@@ -20,10 +21,10 @@
                 android:id="@+id/show_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="35sp"
+                android:gravity="center_vertical"
                 android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="35sp" />
 
         </LinearLayout>
 

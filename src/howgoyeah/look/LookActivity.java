@@ -36,7 +36,7 @@ public class LookActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_look);
+		setContentView(R.layout.activity_looks);
 		
 		/*ImageView QuesPicture = (ImageView) findViewById(R.id.QuesPicture);
         QuesPicture.setImageResource(R.drawable.look_three);*/
@@ -71,7 +71,7 @@ public class LookActivity extends Activity {
 			@Override
 			public void onTick(long millisUntilFinished) {
 				// TODO Auto-generated method stub
-				timerview.setText("seconds remaining:"+millisUntilFinished/1000);
+				timerview.setText("剩餘秒數:\t"+millisUntilFinished/1000);
 			}
 
 			@Override
@@ -175,12 +175,11 @@ public class LookActivity extends Activity {
 	private void setquestion() {
 		int ques_picture = (int)(Math.random()* 5);
 		int ques_choice = (int)(Math.random()* 3);
-		
-		
+		 
 		ImageView QuesPicture = (ImageView) findViewById(R.id.QuesPicture);
 		ImageView QuesChoice = (ImageView) findViewById(R.id.QuesChoice);
 		TextView countcorrect = (TextView) findViewById(R.id.countcorrect);
-        countcorrect.setText("目前答對題數:"+correct+"");
+        countcorrect.setText("答對題數:\t"+correct+"");
 		
 		switch (ques_picture) {
 		case 0:

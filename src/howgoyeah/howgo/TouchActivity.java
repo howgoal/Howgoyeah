@@ -28,7 +28,7 @@ public class TouchActivity extends Activity {
 
 	TextView show_phone_number,show_count,show_time;
 	private Timer timer;
-	private int gasGame = 500;
+	private int gasGame = 400;
 	private int game_time = 0;
 	private Long startTime;
 	public Long seconds;
