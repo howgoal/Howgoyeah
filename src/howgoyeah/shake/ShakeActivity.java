@@ -1,5 +1,7 @@
 package howgoyeah.shake;
 
+import howgoyeah.howgo.TouchActivity;
+
 import com.example.howgoyeah.R;
 
 import android.app.ActionBar;
@@ -7,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -93,6 +96,10 @@ public class ShakeActivity extends Activity {
 //					ShakeActivity.this.finish();
 //					Log.i("><", "123456");
 //				}	
+				Intent returnIntent = new Intent();
+            	returnIntent.putExtra("result_shake",Integer.toString(condition));
+            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+            	setResult(RESULT_OK,returnIntent);
 				ShakeActivity.this.finish();
 			} else {
 				tmp_seconds = 30 - Integer.parseInt(seconds.toString());

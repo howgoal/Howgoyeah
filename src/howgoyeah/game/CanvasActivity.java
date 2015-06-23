@@ -85,7 +85,7 @@ public class CanvasActivity extends Activity {
 	        }
 	    }else if(requestCode==3){
 	        if(resultCode == RESULT_OK){
-	            String result_shake= String.valueOf(ShakeActivity.condition);
+	        	String result_shake= data.getStringExtra("result_shake");
 	            Log.v("result_shake", result_shake);
 	        }
 	        if (resultCode == RESULT_CANCELED) {

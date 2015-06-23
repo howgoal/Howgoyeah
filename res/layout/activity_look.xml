@@ -10,8 +10,9 @@
         android:layout_height="wrap_content" >
         
 	    <TableRow >
+	        
 	        <ImageView 
-	            android:id="@+id/QuesChoice"
+	            android:id="@+id/QuesChoice2"
 	            android:layout_width="200dp"
 	            android:layout_height="100dp"/>
 	        
@@ -19,7 +20,7 @@
         <TableRow>
             
             <ImageView 
-        		android:id="@+id/QuesPicture"
+        		android:id="@+id/QuesPicture2"
         		android:layout_width="200dp"
         		android:layout_height="200dp" />
         </TableRow>
@@ -27,31 +28,31 @@
         <TableRow>
             <LinearLayout>
                 <ImageButton 
-            	android:id="@+id/button_red"
+            	android:id="@+id/button_red2"
             	android:layout_width="50dp"
             	android:layout_height="50dp"
             	android:src="@drawable/ans_red" />
         
 	        <ImageButton 
-	            android:id="@+id/button_orange"
+	            android:id="@+id/button_orange2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_orange"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_yellow"
+	            android:id="@+id/button_yellow2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_yellow"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_green"
+	            android:id="@+id/button_green2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_green"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_blue"
+	            android:id="@+id/button_blue2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_blue"/>
@@ -63,31 +64,31 @@
             <LinearLayout>
                 
 	        <ImageButton 
-	            android:id="@+id/button_purple"
+	            android:id="@+id/button_purple2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_purple"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_black"
+	            android:id="@+id/button_black2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_black"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_white"
+	            android:id="@+id/button_white2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_white"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_gray"
+	            android:id="@+id/button_gray2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_gray"/>
 	        
 	        <ImageButton 
-	            android:id="@+id/button_brown"
+	            android:id="@+id/button_brown2"
 	            android:layout_width="50dp"
 	            android:layout_height="50dp"
 	            android:src="@drawable/ans_brown"/>
@@ -97,14 +98,14 @@
         
         <TableRow >
             <TextView 
-                android:id="@+id/countcorrect"
+                android:id="@+id/countcorrect2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             
         </TableRow>
         <TableRow >
             <TextView 
-                android:id="@+id/timerview"
+                android:id="@+id/timerview2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </TableRow>
