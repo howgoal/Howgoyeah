@@ -1,4 +1,4 @@
-package howgoyeah.shake;
+package com.example.howgoyeah.shake;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,40 +21,39 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class ShakeActivity extends Activity{
-	private SensorManager mSensorManager; // é«”æ??(Sensor)ä½¿ç”¨ç®¡ç??
-	private Sensor mSensor; // é«”æ??(Sensor)é¡åˆ¥
-	private float mLastX; // xè»¸é?”æ??(Sensor)??ç§»
-	private float mLastY; // yè»¸é?”æ??(Sensor)??ç§»
-	private float mLastZ; // zè»¸é?”æ??(Sensor)??ç§»
-	private double mSpeed; // ?”©??•å?›é?“æ•¸åº?
-	private long mLastUpdateTime; // è§¸ç™¼??‚é??
+	private SensorManager mSensorManager; // æ“ƒîƒï¿½ï¿½(Sensor)é›¿è¼»îœ…èâˆ ï¿½ï¿½
+	private Sensor mSensor; // æ“ƒîƒï¿½ï¿½(Sensor)æ†¿îµ¤ï†
+	private float mLastX; // xé  è³Šï¿½îƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å®
+	private float mLastY; // yé  è³Šï¿½îƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å®
+	private float mLastZ; // zé  è³Šï¿½îƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å®
+	private double mSpeed; // ï¿½îœ†ï¿½ï¿½îŸŸï¿½î®‘ï¿½îš¦î²æ‘¨ï¿½
+	private long mLastUpdateTime; // é–«è²Šî¨ªï¿½ï¿½î¿œï¿½ï¿½
 	
 	//private TextView show;
 	private int counter = 0;
 	public static int condition = 0;
 
-	// ?”©??•å?›é?“æ•¸åº¦è¨­å®šå?? (?•¸?¼è?Šå¤§???”©??•è?Šå¤§??›ï?Œæ•¸?¼è?Šå?è?•è?•ç”©??•å³??ƒè§¸?™¼)
+	// ï¿½îœ†ï¿½ï¿½îŸŸï¿½î®‘ï¿½îš¦î²æ‘¨è¥¿èº«æ‘°î«°ï¿½ï¿½ (ï¿½î²ï¿½æ½¸ï¿½ï“€ä¹‹ï¿½ï¿½ï¿½îœ†ï¿½ï¿½îŸ¢ï¿½ï“€ä¹‹ï¿½ï¿½î®—ï¿½ï—»î²ï¿½æ½¸ï¿½ï“€ï¿½î´ï¿½îŸ¢ï¿½îŸ¡îœ†ï¿½ï¿½îŸŸï™¥ï¿½ï¿½ï¸å­›ï¿½î¨ª)
 	private static final int SPEED_SHRESHOLD = 4000;
 
-	// è§¸ç™¼??“é?”æ?‚é??
+	// é–«è²Šî¨ªï¿½ï¿½îš©ï¿½îƒï¿½î¿œï¿½ï¿½
 	private static final int UPTATE_INTERVAL_TIME = 70;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		ShakeCanvas canvas = new ShakeCanvas(this);
 		setContentView(canvas);
 		//setContentView(R.layout.activity_shake);	
 
-		// ??–å?—é?”æ??(Sensor)??å?™ä½¿?”¨æ¬Šé??
+		// ï¿½ï¿½î¡¼ï¿½î¤ï¿½îƒï¿½ï¿½(Sensor)ï¿½ï¿½ïš—ï¿½î©’è™ï¿½îœ…ç”ˆï“„ï¿½ï¿½
 		mSensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
-		// ??–å?—æ?‹æ?ŸSensor????‹è¨­å®?
+		// ï¿½ï¿½î¡¼ï¿½î¤šï¿½ï•ï¿½î¶‘ensorï¿½ï¿½ï¿½ï¿½ï• èº«æ‘°ï¿½
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-		// è¨»å?Šé?”æ??(Sensor)?”©??•è§¸?™¼Listener
+		// é–®é¤ƒï¿½ï“„ï¿½îƒï¿½ï¿½(Sensor)ï¿½îœ†ï¿½ï¿½îŸ¢å­›ï¿½î¨ªListener
 		mSensorManager.registerListener(SensorListener, mSensor,
 				SensorManager.SENSOR_DELAY_GAME);
 		
@@ -64,24 +63,24 @@ public class ShakeActivity extends Activity{
 
 	private SensorEventListener SensorListener = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent mSensorEvent) {
-			// ?•¶??è§¸?™¼??‚é??
+			// ï¿½î°ï¿½ï¿½ïššå­›ï¿½î¨ªï¿½ï¿½î¿œï¿½ï¿½
 			long mCurrentUpdateTime = System.currentTimeMillis();
 
-			// è§¸ç™¼??“é?”æ?‚é?? = ?•¶??è§¸?™¼??‚é?? - ä¸Šæ¬¡è§¸ç™¼??‚é??
+			// é–«è²Šî¨ªï¿½ï¿½îš©ï¿½îƒï¿½î¿œï¿½ï¿½ = ï¿½î°ï¿½ï¿½ïššå­›ï¿½î¨ªï¿½ï¿½î¿œï¿½ï¿½ - éŠï“æ´»é–«è²Šî¨ªï¿½ï¿½î¿œï¿½ï¿½
 			long mTimeInterval = mCurrentUpdateTime - mLastUpdateTime;
 
-			// ?‹¥è§¸ç™¼??“é?”æ?‚é??< 70 ??‡return;
+			// ï¿½ï”é–«è²Šî¨ªï¿½ï¿½îš©ï¿½îƒï¿½î¿œï¿½ï¿½< 70 ï¿½ï¿½ïŠ˜eturn;
 			if (mTimeInterval < UPTATE_INTERVAL_TIME)
 				return;
 
 			mLastUpdateTime = mCurrentUpdateTime;
 
-			// ??–å?—xyzé«”æ??(Sensor)??ç§»
+			// ï¿½ï¿½î¡¼ï¿½î£yzæ“ƒîƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å®
 			float x = mSensorEvent.values[0];
 			float y = mSensorEvent.values[1];
 			float z = mSensorEvent.values[2];
 
-			// ?”©??•å?ç§»?Ÿåº¦ = xyzé«”æ??(Sensor)??ç§» - ä¸Šæ¬¡xyzé«”æ??(Sensor)??ç§»
+			// ï¿½îœ†ï¿½ï¿½îŸŸï¿½î³å®ï¿½î¸æ¼² = xyzæ“ƒîƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å® - éŠï“æ´»xyzæ“ƒîƒï¿½ï¿½(Sensor)ï¿½ï¿½î³å®
 			float mDeltaX = x - mLastX;
 			float mDeltaY = y - mLastY;
 			float mDeltaZ = z - mLastZ;
@@ -90,14 +89,14 @@ public class ShakeActivity extends Activity{
 			mLastY = y;
 			mLastZ = z;
 
-			// é«”æ??(Sensor)?”©??•å?›é?“é?Ÿåº¦?…¬å¼?
+			// æ“ƒîƒï¿½ï¿½(Sensor)ï¿½îœ†ï¿½ï¿½îŸŸï¿½î®‘ï¿½îš©ï¿½î¸æ¼²ï¿½ï…¶æ’˜ï¿½
 			mSpeed = Math.sqrt(mDeltaX * mDeltaX + mDeltaY * mDeltaY + mDeltaZ
 					* mDeltaZ)
 					/ mTimeInterval * 10000;
 
-			// ?‹¥é«”æ??(Sensor)?”©??•é?Ÿåº¦å¤§æ–¼ç­‰æ–¼?”©??•è¨­å®šå?¼å?‡é?²å…¥ (??”åˆ°?”©??•å?›é?“å?Šé?Ÿåº¦)
+			// ï¿½ï”æ“ƒîƒï¿½ï¿½(Sensor)ï¿½îœ†ï¿½ï¿½îŸ£ï¿½î¸æ¼²æ†­æ‰³î¡“è‘ï¤î¡“ï¿½îœ†ï¿½ï¿½îŸ¢èº«æ‘°î«°ï¿½æ¾†ï¿½ï‹­ï¿½è„£ï…¯ (ï¿½ï¿½î‚ï‘ï¿½îœ†ï¿½ï¿½îŸŸï¿½î®‘ï¿½îš¥ï¿½ï“„ï¿½î¸æ¼²)
 			if (mSpeed >= SPEED_SHRESHOLD) {
-				// ??”åˆ°??–ä???–ç”©??•å?Œè?å?šç?„ä?‹æ??
+				// ï¿½ï¿½î‚ï‘ï¿½ï¿½î¡»ï¿½ï¿½ï¿½î¡¾îœ†ï¿½ï¿½îŸŸï¿½ï—½ï¿½î¼»ï¿½î«²ï¿½ï„‘ï¿½ï•ï¿½ï¿½
 				counter++;
 				//Log.e(String.valueOf(counter), "shake");
 				//show.setText(String.valueOf(counter));
@@ -113,7 +112,7 @@ public class ShakeActivity extends Activity{
 	protected void onDestroy() 
 	{
 	        super.onDestroy();
-	        //?œ¨ç¨‹å?é?œé?‰æ?‚ç§»?™¤é«”æ??(Sensor)è§¸ç™¼
+	        //ï¿½î¯­è”ï•ï¿½îµï¿½î°®ï¿½ï¤ï¿½î¿šå®ï¿½î¨’æ“ƒîƒï¿½ï¿½(Sensor)é–«è²Šî¨ª
 	        mSensorManager.unregisterListener(SensorListener);
 	}
 

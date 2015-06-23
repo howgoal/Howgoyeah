@@ -1,18 +1,21 @@
-package howgoyeah.game;
-
-import howgoyeah.exampleGame.GameOverMode;
-import howgoyeah.exampleGame.OneMode;
-import howgoyeah.exampleGame.TwoMode;
+package com.example.howgoyeah.game;
 
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.zip.Inflater;
 
+import com.example.howgoyeah.MainActivity;
 import com.example.howgoyeah.R;
 import com.example.howgoyeah.R.layout;
 import com.example.howgoyeah.R.menu;
+import com.example.howgoyeah.exampleGame.GameOverMode;
+import com.example.howgoyeah.exampleGame.OneMode;
+import com.example.howgoyeah.exampleGame.TwoMode;
+import com.example.howgoyeah.howgo.TouchActivity;
+import com.example.howgoyeah.look.LookActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -22,6 +25,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class CanvasActivity extends Activity {
 	LinearLayout layout;
@@ -55,6 +59,30 @@ public class CanvasActivity extends Activity {
 
 		return super.onCreateOptionsMenu(menu);
 	}
+	
+	
+	protected void onActivityResult(int requestCode, int resultCode , Intent data) {
+
+	    if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	            String result= data.getStringExtra("result");
+	            Log.v("touch_grade2", result);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    
+	    }else if(requestCode==2){
+	        if(resultCode == RESULT_OK){
+	            String result= data.getStringExtra("result");
+	            Log.v("lookscore", result);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}//onActivityResult
+	
 	private TimerTask  timerTaskGame = new TimerTask() {
 		@Override
 		public void run() {
@@ -69,7 +97,14 @@ public class CanvasActivity extends Activity {
 				gameController.setCurrentModeGame(new TwoMode());
 				
 				Log.v("set2","2Mode");
+				//Bundle sendscore = getIntent().getExtras();
+				//int lookscore = sendscore.getInt("lookscore");
+				//Log.v("lookscore",Integer.toString(lookscore));
+				//Toast.makeText(CanvasActivity.this,""+lookscore+"", Toast.LENGTH_SHORT).show();
 				mode+=1;
+				Intent lookscore = new Intent();
+				lookscore.setClass(CanvasActivity.this, LookActivity.class);
+				startActivityForResult(lookscore, 2);
 				break;
 			case 3:
 				Log.v("set3","3Mode");
@@ -78,6 +113,10 @@ public class CanvasActivity extends Activity {
 			case 4:
 				Log.v("set4","4Mode");
 				mode+=1;
+				Intent touch = new Intent();
+				touch.setClass(CanvasActivity.this, TouchActivity.class);
+				startActivityForResult(touch, 4);
+				
 				break;
 			case 5:
 				gameController.setCurrentModeGame(new GameOverMode());

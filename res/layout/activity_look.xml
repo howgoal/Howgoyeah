@@ -101,6 +101,14 @@
                 android:id="@+id/countcorrect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            
         </TableRow>
+        <TableRow >
+            <TextView 
+                android:id="@+id/timerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+        
     </TableLayout>
 </LinearLayout>
