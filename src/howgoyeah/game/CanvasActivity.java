@@ -1,4 +1,8 @@
-package com.example.howgoyeah.game;
+package howgoyeah.game;
+
+import howgoyeah.exampleGame.GameOverMode;
+import howgoyeah.exampleGame.OneMode;
+import howgoyeah.exampleGame.TwoMode;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -7,9 +11,6 @@ import java.util.zip.Inflater;
 import com.example.howgoyeah.R;
 import com.example.howgoyeah.R.layout;
 import com.example.howgoyeah.R.menu;
-import com.example.howgoyeah.exampleGame.GameOverMode;
-import com.example.howgoyeah.exampleGame.OneMode;
-import com.example.howgoyeah.exampleGame.TwoMode;
 
 import android.app.Activity;
 import android.os.Bundle;

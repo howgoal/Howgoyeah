@@ -1,4 +1,4 @@
-package com.example.howgoyeah.look;
+package howgoyeah.look;
 
 import com.example.howgoyeah.R;
 

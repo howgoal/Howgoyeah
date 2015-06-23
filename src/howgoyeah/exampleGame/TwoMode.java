@@ -1,20 +1,18 @@
-package com.example.howgoyeah.exampleGame;
+package howgoyeah.exampleGame;
 
+import howgoyeah.game.GameController;
+import howgoyeah.game.ModeGame;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 
-import com.example.howgoyeah.game.GameController;
-import com.example.howgoyeah.game.ModeGame;
-
-public class OneMode extends ModeGame {
+public class TwoMode extends ModeGame{
 	Paint paint;
 	GameController gameController;
 	int x,y=0;
-	public OneMode() {
+	public TwoMode() {
 		// TODO Auto-generated constructor stub
-		//get GameController 
 		gameController = GameController.getInstance();
 		
 		paint = new Paint();
@@ -29,17 +27,13 @@ public class OneMode extends ModeGame {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		x = (int) event.getX();
-		y = (int) event.getY();
-		gameController.cavasInvalidate();
 		return false;
 	}
 
 	@Override
 	public void OnDraw(Canvas canvas) {
 		// TODO Auto-generated method stub
-		canvas.drawText("oneMode Example", x, y, paint);
-		
+		canvas.drawText("twoMode Example", x, y, paint);
 	}
 
 }
