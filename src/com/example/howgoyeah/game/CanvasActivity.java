@@ -12,6 +12,7 @@ import com.example.howgoyeah.exampleGame.GameOverMode;
 import com.example.howgoyeah.exampleGame.OneMode;
 import com.example.howgoyeah.exampleGame.TwoMode;
 import com.example.howgoyeah.howgo.TouchActivity;
+import com.example.howgoyeah.look.LookActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -70,6 +71,15 @@ public class CanvasActivity extends Activity {
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
 	        }
+	    
+	    }else if(requestCode==2){
+	        if(resultCode == RESULT_OK){
+	            String result= data.getStringExtra("result");
+	            Log.v("lookscore", result);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
 	    }
 	}//onActivityResult
 	
@@ -92,6 +102,9 @@ public class CanvasActivity extends Activity {
 				//Log.v("lookscore",Integer.toString(lookscore));
 				//Toast.makeText(CanvasActivity.this,""+lookscore+"", Toast.LENGTH_SHORT).show();
 				mode+=1;
+				Intent lookscore = new Intent();
+				lookscore.setClass(CanvasActivity.this, LookActivity.class);
+				startActivityForResult(lookscore, 2);
 				break;
 			case 3:
 				Log.v("set3","3Mode");
@@ -100,9 +113,9 @@ public class CanvasActivity extends Activity {
 			case 4:
 				Log.v("set4","4Mode");
 				mode+=1;
-				Intent i = new Intent();
-				i.setClass(CanvasActivity.this, TouchActivity.class);
-				startActivityForResult(i, 1);
+				Intent touch = new Intent();
+				touch.setClass(CanvasActivity.this, TouchActivity.class);
+				startActivityForResult(touch, 4);
 				
 				break;
 			case 5:

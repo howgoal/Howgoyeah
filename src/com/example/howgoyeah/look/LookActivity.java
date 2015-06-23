@@ -2,6 +2,7 @@ package com.example.howgoyeah.look;
 
 import com.example.howgoyeah.R;
 import com.example.howgoyeah.game.CanvasActivity;
+import com.example.howgoyeah.howgo.TouchActivity;
 
 import android.R.layout;
 import android.app.Activity;
@@ -64,7 +65,7 @@ public class LookActivity extends Activity {
         setquestion();
         
         timerview = (TextView)findViewById(R.id.timerview);
-        new CountDownTimer(30000,1000){
+        new CountDownTimer(5000,1000){
 
 			@Override
 			public void onTick(long millisUntilFinished) {
@@ -76,10 +77,10 @@ public class LookActivity extends Activity {
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				
-				Intent intent_score = new Intent();
-				Bundle sendscore = new Bundle();
-				sendscore.putInt("lookscore", correct);
-				intent_score.putExtras(sendscore);
+				Intent returnIntent = new Intent();
+            	returnIntent.putExtra("result",Integer.toString(correct));
+            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+            	setResult(RESULT_OK,returnIntent);
 				
 				LookActivity.this.finish();
 			}
