@@ -1,87 +1,140 @@
-package com.example.howgoyeah.shake;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.locks.Condition;
+package howgoyeah.shake;
 
 import com.example.howgoyeah.R;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ShakeActivity extends Activity{
-	private SensorManager mSensorManager; // 體感(Sensor)使用管理
-	private Sensor mSensor; // 體感(Sensor)類別
-	private float mLastX; // x軸體感(Sensor)偏移
-	private float mLastY; // y軸體感(Sensor)偏移
-	private float mLastZ; // z軸體感(Sensor)偏移
-	private double mSpeed; // 甩動力道數度
-	private long mLastUpdateTime; // 觸發時間
-	
-	//private TextView show;
+public class ShakeActivity extends Activity {
+	private SensorManager mSensorManager;
+	private Sensor mSensor;
+	private float mLastX;
+	private float mLastY;
+	private float mLastZ;
+	private double mSpeed;
+	private long mLastUpdateTime;
+
+	// private TextView show;
 	private int counter = 0;
 	public static int condition = 0;
+	public static boolean stopTimer = false;
+	public static int tmp_seconds = 30;
+	private Long startTime;
+	public Long seconds;
+	private Handler handler = new Handler();
+	
+	private TextView shake;
+	private TextView time;
+	private ImageView pika;	
 
-	// 甩動力道數度設定值 (數值越大需甩動越大力，數值越小輕輕甩動即會觸發)
 	private static final int SPEED_SHRESHOLD = 4000;
 
-	// 觸發間隔時間
 	private static final int UPTATE_INTERVAL_TIME = 70;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		ShakeCanvas canvas = new ShakeCanvas(this);
-		setContentView(canvas);
-		//setContentView(R.layout.activity_shake);	
+		getActionBar().hide();
 
-		// 取得體感(Sensor)服務使用權限
+		ShakeCanvas canvas = new ShakeCanvas(this);
+		//setContentView(canvas);
+		setContentView(R.layout.activity_shake);
+
+		
 		mSensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
-		// 取得手機Sensor狀態設定
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-		// 註冊體感(Sensor)甩動觸發Listener
+		
 		mSensorManager.registerListener(SensorListener, mSensor,
 				SensorManager.SENSOR_DELAY_GAME);
+
+		time = (TextView) findViewById(R.id.time_data);
+		shake = (TextView) findViewById(R.id.shake_data);
+		pika = (ImageView) findViewById(R.id.pika);
 		
-		//show = (TextView) findViewById(R.id.show);
+
+		// setTimer();
+		startTime = System.currentTimeMillis();
+		handler.postDelayed(updateTimer, 1000); // start timer
 	}
 	
 
+	private Runnable updateTimer = new Runnable() {
+		public void run() {
+			Long spentTime = System.currentTimeMillis() - startTime;
+			seconds = (spentTime / 1000) % 60;
+
+			if (seconds > 30) {
+				handler.removeCallbacks(updateTimer); // stop timer
+//				new AlertDialog.Builder(ShakeActivity.this)
+//			    .setTitle("休息�?�?")
+//			    .setMessage("總�?��?��?�次?��?��: " + String.valueOf(condition) + "\n3秒�?�即?��??��?��?��?��?��?�戰??�~")
+//			    .show();
+//				if(seconds > 33) {
+//					stopTimer = true;
+//					ShakeActivity.this.finish();
+//					Log.i("><", "123456");
+//				}	
+				ShakeActivity.this.finish();
+			} else {
+				tmp_seconds = 30 - Integer.parseInt(seconds.toString());
+				time.setText(String.valueOf(tmp_seconds));
+				shake.setText(String.valueOf(condition));
+				// invalidate(); // do onDraw()
+				stopTimer = false;
+				checkImage();
+				// Log.i("run", "><");
+				handler.postDelayed(this, 1000);
+			}
+		}
+	};
+	
+	private void checkImage() {
+		if(condition < 50) {
+			
+		} else if(condition < 100) {
+			pika.setImageResource(R.drawable.power_two);
+		} else if(condition < 150) {
+			pika.setImageResource(R.drawable.power_three);
+		} else {
+			pika.setImageResource(R.drawable.power_four);
+		}
+	}
+
 	private SensorEventListener SensorListener = new SensorEventListener() {
 		public void onSensorChanged(SensorEvent mSensorEvent) {
-			// 當前觸發時間
+
 			long mCurrentUpdateTime = System.currentTimeMillis();
 
-			// 觸發間隔時間 = 當前觸發時間 - 上次觸發時間
 			long mTimeInterval = mCurrentUpdateTime - mLastUpdateTime;
 
-			// 若觸發間隔時間< 70 則return;
 			if (mTimeInterval < UPTATE_INTERVAL_TIME)
 				return;
 
 			mLastUpdateTime = mCurrentUpdateTime;
 
-			// 取得xyz體感(Sensor)偏移
 			float x = mSensorEvent.values[0];
 			float y = mSensorEvent.values[1];
 			float z = mSensorEvent.values[2];
 
-			// 甩動偏移速度 = xyz體感(Sensor)偏移 - 上次xyz體感(Sensor)偏移
 			float mDeltaX = x - mLastX;
 			float mDeltaY = y - mLastY;
 			float mDeltaZ = z - mLastZ;
@@ -90,17 +143,16 @@ public class ShakeActivity extends Activity{
 			mLastY = y;
 			mLastZ = z;
 
-			// 體感(Sensor)甩動力道速度公式
 			mSpeed = Math.sqrt(mDeltaX * mDeltaX + mDeltaY * mDeltaY + mDeltaZ
 					* mDeltaZ)
 					/ mTimeInterval * 10000;
 
-			// 若體感(Sensor)甩動速度大於等於甩動設定值則進入 (達到甩動力道及速度)
+
 			if (mSpeed >= SPEED_SHRESHOLD) {
-				// 達到搖一搖甩動後要做的事情
+				
 				counter++;
-				//Log.e(String.valueOf(counter), "shake");
-				//show.setText(String.valueOf(counter));
+				// Log.e(String.valueOf(counter), "shake");
+				// show.setText(String.valueOf(counter));
 				condition = counter;
 			}
 		}
@@ -108,14 +160,15 @@ public class ShakeActivity extends Activity{
 		public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		}
 	};
+
 	
-	@Override
 	protected void onDestroy() 
 	{
 	        super.onDestroy();
-	        //在程式關閉時移除體感(Sensor)觸發
+	        
 	        mSensorManager.unregisterListener(SensorListener);
 	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

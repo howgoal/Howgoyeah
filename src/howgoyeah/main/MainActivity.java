@@ -1,9 +1,13 @@
-package com.example.howgoyeah;
+package howgoyeah.main;
 
-import com.example.howgoyeah.game.CanvasActivity;
-import com.example.howgoyeah.howgo.TouchActivity;
-import com.example.howgoyeah.look.LookActivity;
-import com.example.howgoyeah.shake.ShakeActivity;
+import howgoyeah.game.CanvasActivity;
+import howgoyeah.howgo.TouchActivity;
+import howgoyeah.look.LookActivity;
+import howgoyeah.shake.ShakeActivity;
+
+import com.example.howgoyeah.MediaPlayerService;
+import com.example.howgoyeah.R;
+import com.example.howgoyeah.RankActivity;
 
 import android.R.menu;
 import android.app.Activity;
