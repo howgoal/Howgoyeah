@@ -1,8 +1,11 @@
 package howgoyeah.slide;
 
+import howgoyeah.look.LookActivity;
+
 import com.example.howgoyeah.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -38,6 +41,13 @@ public class SlideActivity extends Activity {
 			public void onFinish() {
 				// TODO Auto-generated method stub
 				textTime.setText("Done!");
+				
+				Intent returnIntent = new Intent();
+				int x = scrollView.getScrollY();
+            	returnIntent.putExtra("result_slide",Integer.toString(x));
+            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+            	setResult(RESULT_OK,returnIntent);
+				
 				finish();
 			}
 
@@ -56,6 +66,7 @@ public class SlideActivity extends Activity {
 			text.setText(String.valueOf(i * 5 + "M"));
 			text.setMinHeight(500);
 			text.setTextColor(Color.WHITE);
+			text.setTextSize(30);
 			linearLayout.addView(text);
 		}
 		scrollView.setOnTouchListener(scroll);

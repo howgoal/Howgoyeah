@@ -33,7 +33,8 @@
         </activity>
         <activity android:name="howgoyeah.look.LookActivity" >
         </activity>
->
+        <activity android:name="howgoyeah.slide.SlideActivity"></activity>
+>
     </application>
 
 </manifest>

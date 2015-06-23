@@ -53,7 +53,7 @@ public class TouchActivity extends Activity {
 		//create_phone_number();
 		create_string();
 		show_time = (TextView)findViewById(R.id.show_time);
-		 new CountDownTimer(5000,1000){
+		 new CountDownTimer(30000,1000){
 	            
 	            @Override
 	            public void onFinish() {
@@ -61,7 +61,7 @@ public class TouchActivity extends Activity {
 	            	show_time.setText("Done!");
 
 	            	Intent returnIntent = new Intent();
-	            	returnIntent.putExtra("result",Integer.toString(touch_number_count));
+	            	returnIntent.putExtra("result_touch",Integer.toString(touch_number_count));
 	            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
 	            	setResult(RESULT_OK,returnIntent);
 	            	TouchActivity.this.finish();

@@ -4,6 +4,7 @@ import howgoyeah.game.CanvasActivity;
 import howgoyeah.howgo.TouchActivity;
 import howgoyeah.look.LookActivity;
 import howgoyeah.shake.ShakeActivity;
+import howgoyeah.slide.SlideActivity;
 
 import com.example.howgoyeah.MediaPlayerService;
 import com.example.howgoyeah.R;
@@ -99,31 +100,36 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			Intent intent = new Intent();
 			intent.setClass(MainActivity.this, CanvasActivity.class);
 			startActivity(intent);
-			MainActivity.this.finish();
+			
 			break;
 		case R.id.ray:
 			Log.v("ray", "ray block");
 			Intent intent_look = new Intent();
 			intent_look.setClass(MainActivity.this, LookActivity.class);
 			startActivity(intent_look);
-			MainActivity.this.finish();
+			
 			break;
 		case R.id.outxian:
 			Log.v("outxian", "outxian block");
 			Intent intent_shake = new Intent();
 			intent_shake.setClass(MainActivity.this, ShakeActivity.class);
 			startActivity(intent_shake);
-			MainActivity.this.finish();
+		
 			break;
 		case R.id.howgo:
 			Log.v("howgo", "howgo block");
 			Intent intent_howgo = new Intent();
 			intent_howgo.setClass(MainActivity.this, TouchActivity.class);
 			startActivity(intent_howgo);
-			MainActivity.this.finish();
+			
 			break;
 		case R.id.sin:
 			Log.v("sin", "sin block");
+			Intent intent_slide = new Intent();
+			intent_slide.setClass(MainActivity.this, SlideActivity.class);
+			startActivity(intent_slide); 
+			
+			
 		case R.id.game_rank:
 			Intent rank = new Intent();
 			rank.setClass(MainActivity.this, RankActivity.class);
