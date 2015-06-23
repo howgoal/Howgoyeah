@@ -4,6 +4,7 @@ import howgoyeah.game.CanvasActivity;
 import howgoyeah.howgo.TouchActivity;
 import howgoyeah.look.LookActivity;
 import howgoyeah.shake.ShakeActivity;
+import howgoyeah.slide.SlideActivity;
 
 import com.example.howgoyeah.R;
 
@@ -96,6 +97,11 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			break;
 		case R.id.sin:
 			Log.v("sin", "sin block");
+			Intent intent_slide = new Intent();
+			intent_slide.setClass(MainActivity.this, SlideActivity.class);
+			startActivity(intent_slide); 
+			MainActivity.this.finish();
+			
 			break;
 		default:
 			break;

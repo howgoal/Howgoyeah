@@ -26,6 +26,7 @@
         <activity android:name="howgoyeah.howgo.TouchActivity"></activity>
         <activity android:name="howgoyeah.shake.ShakeActivity"></activity>
         <activity android:name="howgoyeah.look.LookActivity"></activity>
+        <activity android:name="howgoyeah.slide.SlideActivity"></activity>
     </application>
 
 </manifest>

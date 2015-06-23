@@ -7,6 +7,7 @@ import howgoyeah.howgo.TouchActivity;
 import howgoyeah.look.LookActivity;
 import howgoyeah.main.MainActivity;
 import howgoyeah.shake.ShakeActivity;
+import howgoyeah.slide.SlideActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,7 +36,7 @@ public class CanvasActivity extends Activity {
 	GameController gameController;
 	
 	private Timer timer;
-	private int gasGame = 3000;
+	private int gasGame = 30000;
 	private int mode = 1;
 	
 	@Override
@@ -65,10 +66,10 @@ public class CanvasActivity extends Activity {
 	
 	protected void onActivityResult(int requestCode, int resultCode , Intent data) {
 
-	    if (requestCode == 4) {
+	    if (requestCode == 1) {
 	        if(resultCode == RESULT_OK){
-	            String result= data.getStringExtra("result");
-	            Log.v("touch_grade2", result);
+	            String result_slide= data.getStringExtra("result_slide");
+	            Log.v("result_slide", result_slide);
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
@@ -76,16 +77,24 @@ public class CanvasActivity extends Activity {
 	    
 	    }else if(requestCode==2){
 	        if(resultCode == RESULT_OK){
-	            String result= data.getStringExtra("result");
-	            Log.v("lookscore", result);
+	            String result_look= data.getStringExtra("result_look");
+	            Log.v("result_look", result_look);
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
 	        }
 	    }else if(requestCode==3){
 	        if(resultCode == RESULT_OK){
-	            String result= String.valueOf(ShakeActivity.condition);
-	            Log.v("lookscore", result);
+	            String result_shake= String.valueOf(ShakeActivity.condition);
+	            Log.v("result_shake", result_shake);
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }else if(requestCode==4){
+	        if(resultCode == RESULT_OK){
+	        	String result_touch= data.getStringExtra("result_touch");
+	            Log.v("result_touch", result_touch);
 	        }
 	        if (resultCode == RESULT_CANCELED) {
 	            //Write your code if there's no result
@@ -102,6 +111,9 @@ public class CanvasActivity extends Activity {
 				gameController.setCurrentModeGame(new OneMode());
 				Log.v("setOneMode","oneMode");
 				mode+=1;
+				Intent slidescore = new Intent();
+				slidescore.setClass(CanvasActivity.this, SlideActivity.class);
+				startActivityForResult(slidescore, 1);
 				break;
 			case 2:
 				gameController.setCurrentModeGame(new TwoMode());

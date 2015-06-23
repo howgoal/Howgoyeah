@@ -66,7 +66,7 @@ public class LookActivity extends Activity {
         setquestion();
         
         timerview = (TextView)findViewById(R.id.timerview);
-        new CountDownTimer(5000,1000){
+        new CountDownTimer(30000,1000){
 
 			@Override
 			public void onTick(long millisUntilFinished) {
@@ -79,7 +79,7 @@ public class LookActivity extends Activity {
 				// TODO Auto-generated method stub
 				
 				Intent returnIntent = new Intent();
-            	returnIntent.putExtra("result",Integer.toString(correct));
+            	returnIntent.putExtra("result_look",Integer.toString(correct));
             	//Log.v("touch_grade1", Integer.toString(touch_number_count));
             	setResult(RESULT_OK,returnIntent);
 				
