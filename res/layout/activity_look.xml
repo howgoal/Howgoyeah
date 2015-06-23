@@ -10,7 +10,6 @@
         android:layout_height="wrap_content" >
         
 	    <TableRow >
-	        
 	        <ImageView 
 	            android:id="@+id/QuesChoice"
 	            android:layout_width="200dp"
