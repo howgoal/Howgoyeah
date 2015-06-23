@@ -1,11 +1,12 @@
-package howgoyeah.exampleGame;
+package com.example.howgoyeah.exampleGame;
 
-import howgoyeah.game.GameController;
-import howgoyeah.game.ModeGame;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
+
+import com.example.howgoyeah.game.GameController;
+import com.example.howgoyeah.game.ModeGame;
 
 public class GameOverMode extends ModeGame {
 	Paint paint;
