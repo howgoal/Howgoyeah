@@ -12,6 +12,7 @@ import com.example.howgoyeah.exampleGame.OneMode;
 import com.example.howgoyeah.exampleGame.TwoMode;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class CanvasActivity extends Activity {
 	LinearLayout layout;
@@ -68,6 +70,10 @@ public class CanvasActivity extends Activity {
 				gameController.setCurrentModeGame(new TwoMode());
 				
 				Log.v("set2","2Mode");
+				//Bundle sendscore = getIntent().getExtras();
+				//int lookscore = sendscore.getInt("lookscore");
+				//Log.v("lookscore",Integer.toString(lookscore));
+				//Toast.makeText(CanvasActivity.this,""+lookscore+"", Toast.LENGTH_SHORT).show();
 				mode+=1;
 				break;
 			case 3:

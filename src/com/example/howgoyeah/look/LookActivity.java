@@ -1,10 +1,13 @@
 package com.example.howgoyeah.look;
 
 import com.example.howgoyeah.R;
+import com.example.howgoyeah.game.CanvasActivity;
 
 import android.R.layout;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +29,7 @@ public class LookActivity extends Activity {
 	int guest = 101;
 	int correct = 0;
 	
+	TextView timerview;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -58,6 +62,29 @@ public class LookActivity extends Activity {
         button_brown.setOnClickListener(blistener);
         
         setquestion();
+        
+        timerview = (TextView)findViewById(R.id.timerview);
+        new CountDownTimer(30000,1000){
+
+			@Override
+			public void onTick(long millisUntilFinished) {
+				// TODO Auto-generated method stub
+				timerview.setText("seconds remaining:"+millisUntilFinished/1000);
+			}
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				
+				Intent intent_score = new Intent();
+				Bundle sendscore = new Bundle();
+				sendscore.putInt("lookscore", correct);
+				intent_score.putExtras(sendscore);
+				
+				LookActivity.this.finish();
+			}
+        	
+        }.start();
         
 	}
 	
