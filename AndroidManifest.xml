@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:minSdkVersion="15"
+        android:targetSdkVersion="15" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="howgoyeah.main.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="howgoyeah.game.CanvasActivity" >
-        </activity>
-        <activity android:name="howgoyeah.howgo.TouchActivity" >
-        </activity>
-        <activity android:name="howgoyeah.shake.ShakeActivity" >
-        </activity>
-        <activity android:name="howgoyeah.look.LookActivity" >
-        </activity>
-        <activity
-            android:name="howgoyeah.slide.SlideActivity"
-            android:label="@string/title_activity_slide" >
-        </activity>
+        <activity android:name=".game.CanvasActivity"></activity>
+        <activity android:name=".howgo.TouchActivity"></activity>
+        <activity android:name=".shake.ShakeActivity"></activity>
+        <activity android:name=".look.LookActivity"></activity>
     </application>
 
 </manifest>

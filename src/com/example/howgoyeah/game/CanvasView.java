@@ -1,4 +1,4 @@
-package howgoyeah.game;
+package com.example.howgoyeah.game;
 
 import java.util.ArrayList;
 

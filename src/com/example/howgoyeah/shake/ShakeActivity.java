@@ -1,4 +1,4 @@
-package howgoyeah.shake;
+package com.example.howgoyeah.shake;
 
 import com.example.howgoyeah.R;
 
@@ -40,10 +40,10 @@ public class ShakeActivity extends Activity {
 	
 	private TextView shake;
 	private TextView time;
-	private ImageView pika;
-	
+	private ImageView pika;	
 
 	private static final int SPEED_SHRESHOLD = 4000;
+
 	private static final int UPTATE_INTERVAL_TIME = 70;
 
 	@Override
@@ -56,11 +56,13 @@ public class ShakeActivity extends Activity {
 		//setContentView(canvas);
 		setContentView(R.layout.activity_shake);
 
+		
 		mSensorManager = (SensorManager) this
 				.getSystemService(Context.SENSOR_SERVICE);
 
 		mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+		
 		mSensorManager.registerListener(SensorListener, mSensor,
 				SensorManager.SENSOR_DELAY_GAME);
 
@@ -145,7 +147,9 @@ public class ShakeActivity extends Activity {
 					* mDeltaZ)
 					/ mTimeInterval * 10000;
 
+
 			if (mSpeed >= SPEED_SHRESHOLD) {
+				
 				counter++;
 				// Log.e(String.valueOf(counter), "shake");
 				// show.setText(String.valueOf(counter));
@@ -157,11 +161,12 @@ public class ShakeActivity extends Activity {
 		}
 	};
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		mSensorManager.unregisterListener(SensorListener);
-		
+	
+	protected void onDestroy() 
+	{
+	        super.onDestroy();
+	        
+	        mSensorManager.unregisterListener(SensorListener);
 	}
 	
 

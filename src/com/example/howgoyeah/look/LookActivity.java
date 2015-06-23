@@ -1,10 +1,14 @@
-package howgoyeah.look;
+package com.example.howgoyeah.look;
 
 import com.example.howgoyeah.R;
+import com.example.howgoyeah.game.CanvasActivity;
+import com.example.howgoyeah.howgo.TouchActivity;
 
 import android.R.layout;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +30,7 @@ public class LookActivity extends Activity {
 	int guest = 101;
 	int correct = 0;
 	
+	TextView timerview;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -58,6 +63,29 @@ public class LookActivity extends Activity {
         button_brown.setOnClickListener(blistener);
         
         setquestion();
+        
+        timerview = (TextView)findViewById(R.id.timerview);
+        new CountDownTimer(5000,1000){
+
+			@Override
+			public void onTick(long millisUntilFinished) {
+				// TODO Auto-generated method stub
+				timerview.setText("seconds remaining:"+millisUntilFinished/1000);
+			}
+
+			@Override
+			public void onFinish() {
+				// TODO Auto-generated method stub
+				
+				Intent returnIntent = new Intent();
+            	returnIntent.putExtra("result",Integer.toString(correct));
+            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+            	setResult(RESULT_OK,returnIntent);
+				
+				LookActivity.this.finish();
+			}
+        	
+        }.start();
         
 	}
 	

@@ -1,4 +1,4 @@
-package howgoyeah.shake;
+package com.example.howgoyeah.shake;
 
 import com.example.howgoyeah.R;
 
@@ -26,7 +26,7 @@ public class ShakeCanvas extends View {
 		paint = new Paint();
 		paint.setAntiAlias(true); // remove edge effect	
 	}
-	
+
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -69,7 +69,6 @@ public class ShakeCanvas extends View {
 		canvas.drawText("Passing time: " + String.valueOf(ShakeActivity.tmp_seconds), 70, 400, counterPaint);
 		canvas.drawText("Shake times: " + String.valueOf(mode), 70, 500, counterPaint);
 		canvas.drawText("快來幫皮卡丘充飽電><", 30, 50, notePaint);
-		
 		
 		//Log.i("second", String.valueOf(seconds));
 		

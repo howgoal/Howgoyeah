@@ -1,4 +1,4 @@
-package howgoyeah.howgo;
+package com.example.howgoyeah.howgo;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,9 +10,12 @@ import com.example.howgoyeah.R;
 import android.R.layout;
 import android.R.string;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -23,26 +26,55 @@ public class TouchActivity extends Activity {
 	ImageButton button1, button2, button3, button4, button5, button6, button7,
 			button8, button9, button0;
 
-	TextView show_phone_number,show_count;
+	TextView show_phone_number,show_count,show_time;
 	private Timer timer;
 	private int gasGame = 500;
+	private int game_time = 0;
+	private Long startTime;
+	public Long seconds;
 	int true_count = 0;
-	int call_number_count = 0;
+	int touch_number_count = 0;
 
 	ArrayList<Integer> number = new ArrayList<Integer>();
 	String total = "";
 
 
 	Random rand = new Random(System.currentTimeMillis());
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_touch);
 		init();
 		
+		startTime = System.currentTimeMillis();
+		
 		timer = new Timer();
 		timer.schedule(timerTaskGame, 0, gasGame);
-		create_phone_number();
+		//create_phone_number();
 		create_string();
+		show_time = (TextView)findViewById(R.id.show_time);
+		 new CountDownTimer(5000,1000){
+	            
+	            @Override
+	            public void onFinish() {
+	                // TODO Auto-generated method stub
+	            	show_time.setText("Done!");
+
+	            	Intent returnIntent = new Intent();
+	            	returnIntent.putExtra("result",Integer.toString(touch_number_count));
+	            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+	            	setResult(RESULT_OK,returnIntent);
+	            	TouchActivity.this.finish();
+					//TouchActivity.this.finish();
+	            }
+
+	            @Override
+	            public void onTick(long millisUntilFinished) {
+	                // TODO Auto-generated method stub
+	            	show_time.setText(Long.toString(millisUntilFinished/1000));
+	            }
+	            
+	        }.start();
 	}
 
 	public void create_phone_number(){
@@ -59,12 +91,14 @@ public class TouchActivity extends Activity {
 		@Override
 		
 		public void run() {
-			if(check_all() == true){
-				create_phone_number();
-				create_string();
-			}
-//			int pos = (int)(rand.nextDouble()*10);
-//			number.add(pos);
+//			if(check_all() == true){
+//				create_phone_number();
+//				create_string();
+//			}
+			Long spentTime = System.currentTimeMillis() - startTime;
+			seconds = (spentTime/1000) % 60;
+			int pos = (int)(rand.nextDouble()*10);
+			number.add(pos);
 			canvasHandler.sendMessage(new Message());
 			// TODO Auto-generated method stub
 
@@ -77,7 +111,7 @@ public class TouchActivity extends Activity {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			show_phone_number.setText(create_string());
-			show_count.setText(Integer.toString(call_number_count));
+			//show_count.setText(Integer.toString(call_number_count));//
 		}
 	};
 
@@ -92,7 +126,9 @@ public class TouchActivity extends Activity {
 	public void check(int press) {
 		if (press == number.get(0)) {
 			number.remove(0);
-			true_count++;
+			//true_count++;
+			touch_number_count++;
+			show_count.setText(String.valueOf(touch_number_count));
 			// return true;
 		} else {
 			// return false;
@@ -101,7 +137,7 @@ public class TouchActivity extends Activity {
 	public boolean check_all(){
 		if(true_count == 10){
 			true_count = 0;
-			call_number_count++;
+			touch_number_count++;
 			return true;
 		} else {
 			return false;

@@ -1,11 +1,11 @@
-package howgoyeah.game;
-
-import howgoyeah.exampleGame.GameOverMode;
-import howgoyeah.exampleGame.OneMode;
-import howgoyeah.exampleGame.TwoMode;
+package com.example.howgoyeah.game;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.example.howgoyeah.exampleGame.GameOverMode;
+import com.example.howgoyeah.exampleGame.OneMode;
+import com.example.howgoyeah.exampleGame.TwoMode;
 
 import android.content.Context;
 import android.os.Handler;
