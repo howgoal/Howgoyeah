@@ -129,11 +129,9 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			intent_slide.setClass(MainActivity.this, SlideActivity.class);
 			startActivity(intent_slide); 
 			
-			
+			break;
 		case R.id.game_rank:
-			Intent rank = new Intent();
-			rank.setClass(MainActivity.this, RankActivity.class);
-			startActivity(rank);
+			MainActivity.this.finish();
 
 			break;
 		default:

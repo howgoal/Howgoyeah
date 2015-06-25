@@ -124,6 +124,7 @@ public class CanvasActivity extends Activity {
 				String result_touch = data.getStringExtra("result_touch");
 				Log.v("result_touch", result_touch);
 				point+= Integer.valueOf(result_touch);
+				canvasHandler.sendMessage(new Message());
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -180,7 +181,7 @@ public class CanvasActivity extends Activity {
 				break;
 			case 5:
 				
-				canvasHandler.sendMessage(new Message());
+				
 				timer.cancel();
 				break;
 			default:
