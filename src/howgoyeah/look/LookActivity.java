@@ -28,7 +28,7 @@ public class LookActivity extends Activity {
 	int question[][] = {
 			{3,2,5},{6,7,8},{4,7,2},{5,9,0},{1,6,3},
 			{2,8,4},{0,3,1},{9,4,6},{8,1,7},{0,7,9},
-			{2,5,0},{6,2,3},{4,0,1},{3,1,8},{5,2,4}	
+			{2,5,0},{6,2,3},{4,0,1},{3,1,6},{5,2,4}	
 	};
 	
 	int answer = 100;
@@ -90,6 +90,7 @@ public class LookActivity extends Activity {
 				// TODO Auto-generated method stub
 				
 				Intent returnIntent = new Intent();
+				correct = correct*2;
             	returnIntent.putExtra("result_look",Integer.toString(correct));
             	//Log.v("touch_grade1", Integer.toString(touch_number_count));
             	setResult(RESULT_OK,returnIntent);

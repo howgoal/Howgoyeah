@@ -4,6 +4,7 @@ import howgoyeah.howgo.TouchActivity;
 
 import com.example.howgoyeah.R;
 
+import android.R.integer;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -58,7 +59,7 @@ public class ShakeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		getActionBar().hide();
+		// getActionBar().hide();
 
 		ShakeCanvas canvas = new ShakeCanvas(this);
 		//setContentView(canvas);
@@ -95,18 +96,11 @@ public class ShakeActivity extends Activity {
 
 			if (seconds > 30) {
 				handler.removeCallbacks(updateTimer); // stop timer
-//				new AlertDialog.Builder(ShakeActivity.this)
-//			    .setTitle("休息�?�?")
-//			    .setMessage("總�?��?��?�次?��?��: " + String.valueOf(condition) + "\n3秒�?�即?��??��?��?��?��?��?�戰??�~")
-//			    .show();
-//				if(seconds > 33) {
-//					stopTimer = true;
-//					ShakeActivity.this.finish();
-//					Log.i("><", "123456");
-//				}	
+				int score = (int)condition/5;
+				
 				Intent returnIntent = new Intent();
-            	returnIntent.putExtra("result_shake",Integer.toString(condition));
-            	//Log.v("touch_grade1", Integer.toString(touch_number_count));
+            	returnIntent.putExtra("result_shake",Integer.toString(score));
+            	Log.v("shake_grade!", Integer.toString(score));
             	setResult(RESULT_OK,returnIntent);
 				ShakeActivity.this.finish();
 			} else {
@@ -128,9 +122,9 @@ public class ShakeActivity extends Activity {
 	private void checkImage() {
 		if(condition < 50) {
 			
-		} else if(condition < 100) {
+		} else if(condition < 130) {
 			pika.setImageResource(R.drawable.power_two);
-		} else if(condition < 150) {
+		} else if(condition < 210) {
 			pika.setImageResource(R.drawable.power_three);
 		} else {
 			pika.setImageResource(R.drawable.power_four);
