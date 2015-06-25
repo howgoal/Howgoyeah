@@ -11,6 +11,8 @@ import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -34,6 +36,8 @@ public class TouchActivity extends Activity {
 	public Long seconds;
 	int true_count = 0;
 	int touch_number_count = 0;
+	SoundPool soundPool;
+	int soundId;
 
 	ArrayList<Integer> number = new ArrayList<Integer>();
 	String total = "";
@@ -45,12 +49,12 @@ public class TouchActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_touch);
 		init();
-		
+		soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+		soundId = soundPool.load(this, R.raw.dodo, 1);
 		startTime = System.currentTimeMillis();
 		
 		timer = new Timer();
 		timer.schedule(timerTaskGame, 0, gasGame);
-		//create_phone_number();
 		create_string();
 		show_time = (TextView)findViewById(R.id.show_time);
 		 new CountDownTimer(30000,1000){
@@ -178,33 +182,43 @@ public class TouchActivity extends Activity {
 			switch (v.getId()) {
 			case R.id.imageButton1:
 				check(1);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton2:
 				check(2);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton3:
 				check(3);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton4:
 				check(4);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton5:
 				check(5);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton6:
 				check(6);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton7:
 				check(7);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton8:
 				check(8);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton9:
 				check(9);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			case R.id.imageButton0:
 				check(0);
+				soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 				break;
 			}
 		}
