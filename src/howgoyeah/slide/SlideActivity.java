@@ -47,7 +47,7 @@ public class SlideActivity extends Activity {
 
 				Intent returnIntent = new Intent();
 				int x = scrollView.getScrollY();
-				x = x / 5000;
+				x = x / 10000;
 				returnIntent.putExtra("result_slide", Integer.toString(x));
 				// Log.v("touch_grade1", Integer.toString(touch_number_count));
 				setResult(RESULT_OK, returnIntent);
@@ -82,7 +82,7 @@ public class SlideActivity extends Activity {
 		public boolean onTouch(View v, MotionEvent event) {
 			// TODO Auto-generated method stub
 			int x = scrollView.getScrollY();
-			x = x / 5000;
+			x = x / 10000;
 			textDis.setText("目前分數: " + x);
 			soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
 			return false;

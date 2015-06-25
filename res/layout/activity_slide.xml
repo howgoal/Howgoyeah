@@ -14,18 +14,18 @@
             android:id="@+id/textTime"
             android:layout_width="166dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.43"
             android:text="時間倒數:"
             android:textColor="#fffefe"
             android:textSize="17sp" />
 
         <TextView
             android:id="@+id/textDis"
-            android:layout_width="match_parent"
+            android:layout_width="163dp"
             android:layout_height="wrap_content"
             android:text="滑行距離: 0"
             android:textColor="#fffefe"
             android:textSize="17sp" />
-
     </LinearLayout>
 
     <ScrollView
