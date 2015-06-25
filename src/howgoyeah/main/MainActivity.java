@@ -32,13 +32,13 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 	Button sin;
 	Button howgo;
 	Button allGame;
-	Button game_rank;
+	Button game_rank; 
 	private SoundPool soundPool;
 	private int soundId;
 	private MediaPlayerService mediaPlayerService;
 	private Intent intent;
-
-	@Override
+ 
+	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
