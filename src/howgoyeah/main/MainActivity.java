@@ -61,7 +61,7 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 		intent = new Intent();
 		mediaPlayerService = new MediaPlayerService();
 		intent.setClass(getApplicationContext(), mediaPlayerService.getClass());
-		//startService(intent);
+		startService(intent);
 	
 	}
 
