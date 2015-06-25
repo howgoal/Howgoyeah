@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
-                android:text="搖動次數: "
+                android:text="充電量: "
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="30sp" />
 
@@ -82,7 +82,7 @@
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="次 "
+                android:text="安培(A) "
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="30sp" />
         </LinearLayout>
