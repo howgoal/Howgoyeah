@@ -8,6 +8,8 @@ import com.example.howgoyeah.R;
 import android.R.layout;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Menu;
@@ -32,6 +34,9 @@ public class LookActivity extends Activity {
 	int answer = 100;
 	int guest = 101;
 	int correct = 0;
+	int soundId1;
+	int soundId2;
+	SoundPool soundPool;
 	
 	TextView timerview;
 	@Override
@@ -64,6 +69,10 @@ public class LookActivity extends Activity {
         button_white.setOnClickListener(blistener);
         button_gray.setOnClickListener(blistener);
         button_brown.setOnClickListener(blistener);
+        
+        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+		soundId1 = soundPool.load(this, R.raw.true_1, 1);
+		soundId2 = soundPool.load(this, R.raw.false_1, 1);
         
         setquestion();
         
@@ -102,6 +111,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_orange:
@@ -109,6 +121,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_yellow:
@@ -116,6 +131,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_green:
@@ -123,6 +141,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_blue:
@@ -130,6 +151,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_purple:
@@ -137,6 +161,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_black:
@@ -144,6 +171,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_white:
@@ -151,6 +181,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_gray:
@@ -158,6 +191,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 			case R.id.button_brown:
@@ -165,6 +201,9 @@ public class LookActivity extends Activity {
 				if(answer == guest){
 					correct ++;
 					setquestion();
+					soundPool.play(soundId1, 1.0F, 1.0F, 0, 0, 1.0F);
+				}else{
+					soundPool.play(soundId2, 1.0F, 1.0F, 0, 0, 1.0F);
 				}
 				break;
 				default:
