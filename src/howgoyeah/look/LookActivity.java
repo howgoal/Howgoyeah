@@ -24,7 +24,9 @@ public class LookActivity extends Activity {
 	// ¬õ0 ¾í1 ¶À2 ºñ3 ÂÅ4 µµ5 ¶Â6 ¥Õ7 ¦Ç8 ´Ä9		­I´º0  ¦rªºÃC¦â1  ¦rªº·N«ä2
 	
 	int question[][] = {
-			{3,2,5},{6,7,8},{4,7,2},{5,9,0},{1,6,3}	
+			{3,2,5},{6,7,8},{4,7,2},{5,9,0},{1,6,3},
+			{2,8,4},{0,3,1},{9,4,6},{8,1,7},{0,7,9},
+			{2,5,0},{6,2,3},{4,0,1},{3,1,8},{5,2,4}	
 	};
 	
 	int answer = 100;
@@ -173,7 +175,7 @@ public class LookActivity extends Activity {
 	};
 	
 	private void setquestion() {
-		int ques_picture = (int)(Math.random()* 5);
+		int ques_picture = (int)(Math.random()* 15);
 		int ques_choice = (int)(Math.random()* 3);
 		 
 		ImageView QuesPicture = (ImageView) findViewById(R.id.QuesPicture);
@@ -196,6 +198,36 @@ public class LookActivity extends Activity {
 			break;
 		case 4:
 			QuesPicture.setImageResource(R.drawable.look_four);
+			break;
+		case 5:
+			QuesPicture.setImageResource(R.drawable.look_five);
+			break;
+		case 6:
+			QuesPicture.setImageResource(R.drawable.look_six);
+			break;
+		case 7:
+			QuesPicture.setImageResource(R.drawable.look_seven);
+			break;
+		case 8:
+			QuesPicture.setImageResource(R.drawable.look_eight);
+			break;
+		case 9:
+			QuesPicture.setImageResource(R.drawable.look_nine);
+			break;
+		case 10:
+			QuesPicture.setImageResource(R.drawable.look_ten);
+			break;
+		case 11:
+			QuesPicture.setImageResource(R.drawable.look_eleven);
+			break;
+		case 12:
+			QuesPicture.setImageResource(R.drawable.look_twelve);
+			break;
+		case 13:
+			QuesPicture.setImageResource(R.drawable.look_thirteen);
+			break;
+		case 14:
+			QuesPicture.setImageResource(R.drawable.look_fourteen);
 			break;
 
 		default:
