@@ -14,6 +14,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -44,6 +46,9 @@ public class ShakeActivity extends Activity {
 	private TextView shake;
 	private TextView time;
 	private ImageView pika;	
+	
+	SoundPool soundPool;
+	int soundId;
 
 	private static final int SPEED_SHRESHOLD = 4000;
 
@@ -77,6 +82,9 @@ public class ShakeActivity extends Activity {
 		// setTimer();
 		startTime = System.currentTimeMillis();
 		handler.postDelayed(updateTimer, 1000); // start timer
+		
+		soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
+		soundId = soundPool.load(this, R.raw.chu, 1);
 	}
 	
 
@@ -88,8 +96,8 @@ public class ShakeActivity extends Activity {
 			if (seconds > 30) {
 				handler.removeCallbacks(updateTimer); // stop timer
 //				new AlertDialog.Builder(ShakeActivity.this)
-//			    .setTitle("ä¼‘æ¯ä¸?ä¸?")
-//			    .setMessage("ç¸½è?ˆæ?–å?•æ¬¡?•¸?‚º: " + String.valueOf(condition) + "\n3ç§’å?Œå³?‡ª??•é?‹å?‹ä?‹å?‹æ?‘æˆ°??‰~")
+//			    .setTitle("ä¼‘æ¯ï¿½?ï¿½?")
+//			    .setMessage("ç¸½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½æ¬¡?ï¿½ï¿½?ï¿½ï¿½: " + String.valueOf(condition) + "\n3ç§’ï¿½?ï¿½å³?ï¿½ï¿½??ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½æˆ°??ï¿½~")
 //			    .show();
 //				if(seconds > 33) {
 //					stopTimer = true;
@@ -110,6 +118,9 @@ public class ShakeActivity extends Activity {
 				checkImage();
 				// Log.i("run", "><");
 				handler.postDelayed(this, 1000);
+				if(seconds % 5 == 1) {
+					soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
+				}
 			}
 		}
 	};
