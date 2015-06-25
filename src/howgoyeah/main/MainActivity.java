@@ -25,14 +25,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends Activity implements Button.OnClickListener {
-	Button ray;
-	Button outxian;
-	Button sin;
-	Button howgo;
-	Button allGame;
-	Button game_rank; 
+	ImageButton ray;
+	ImageButton outxian;
+	ImageButton sin;
+	ImageButton howgo;
+	ImageButton allGame;
+	ImageButton game_rank; 
 	private SoundPool soundPool;
 	private int soundId;
 	private MediaPlayerService mediaPlayerService;
@@ -41,13 +42,13 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		ray = (Button) findViewById(R.id.ray);
-		outxian = (Button) findViewById(R.id.outxian);
-		sin = (Button) findViewById(R.id.sin);
-		howgo = (Button) findViewById(R.id.howgo);
-		allGame = (Button) findViewById(R.id.allGame);
-		game_rank = (Button) findViewById(R.id.game_rank);
+		setContentView(R.layout.activity_mains);
+		ray = (ImageButton) findViewById(R.id.ray);
+		outxian = (ImageButton) findViewById(R.id.outxian);
+		sin = (ImageButton) findViewById(R.id.sin);
+		howgo = (ImageButton) findViewById(R.id.howgo);
+		allGame = (ImageButton) findViewById(R.id.allGame);
+		game_rank = (ImageButton) findViewById(R.id.game_rank);
 		ray.setOnClickListener(this);
 		outxian.setOnClickListener(this);
 		sin.setOnClickListener(this);
@@ -131,9 +132,10 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 			
 			
 		case R.id.game_rank:
-			Intent rank = new Intent();
-			rank.setClass(MainActivity.this, RankActivity.class);
-			startActivity(rank);
+//			Intent rank = new Intent();
+//			rank.setClass(MainActivity.this, RankActivity.class);
+//			startActivity(rank);
+			MainActivity.this.finish();
 
 			break;
 		default:
