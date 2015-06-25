@@ -18,6 +18,11 @@ import com.example.howgoyeah.R.layout;
 import com.example.howgoyeah.R.menu;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -34,11 +39,11 @@ public class CanvasActivity extends Activity {
 	LinearLayout layout;
 	CanvasView canvasView;
 	GameController gameController;
-	
+
 	private Timer timer;
 	private int gasGame = 30000;
 	private int mode = 1;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,13 +53,29 @@ public class CanvasActivity extends Activity {
 		// get canvasView memory address
 		gameController = GameController.getInstance();
 		gameController.initial(getApplicationContext());
-		
+
 		layout.addView(gameController.getCanvasView());
-		
-		timer = new Timer();
-		timer.schedule(timerTaskGame, 0,gasGame);
+		dialogShow();
 
 	}
+
+	public void dialogShow() {
+
+		AlertDialog.Builder builder = new Builder(CanvasActivity.this);
+		builder.setMessage("1.向前跑! \n2.睜大眼睛!! \n3.趕快搖!!! \n4.快撥電話!!!! ");
+		builder.setTitle("提示");
+		builder.setPositiveButton("Let's GO", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				timer = new Timer();
+				timer.schedule(timerTaskGame, 0, gasGame);
+			}
+		});
+		builder.create().show();
+
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflator = new MenuInflater(this);
@@ -62,101 +83,101 @@ public class CanvasActivity extends Activity {
 
 		return super.onCreateOptionsMenu(menu);
 	}
-	
-	
-	protected void onActivityResult(int requestCode, int resultCode , Intent data) {
 
-	    if (requestCode == 1) {
-	        if(resultCode == RESULT_OK){
-	            String result_slide= data.getStringExtra("result_slide");
-	            Log.v("result_slide", result_slide);
-	        }
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    
-	    }else if(requestCode==2){
-	        if(resultCode == RESULT_OK){
-	            String result_look= data.getStringExtra("result_look");
-	            Log.v("result_look", result_look);
-	        }
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }else if(requestCode==3){
-	        if(resultCode == RESULT_OK){
-	        	String result_shake= data.getStringExtra("result_shake");
-	            Log.v("result_shake", result_shake);
-	        }
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }else if(requestCode==4){
-	        if(resultCode == RESULT_OK){
-	        	String result_touch= data.getStringExtra("result_touch");
-	            Log.v("result_touch", result_touch);
-	        }
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }
-	}//onActivityResult
-	
-	private TimerTask  timerTaskGame = new TimerTask() {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				String result_slide = data.getStringExtra("result_slide");
+				Log.v("result_slide", result_slide);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+
+		} else if (requestCode == 2) {
+			if (resultCode == RESULT_OK) {
+				String result_look = data.getStringExtra("result_look");
+				Log.v("result_look", result_look);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		} else if (requestCode == 3) {
+			if (resultCode == RESULT_OK) {
+				String result_shake = data.getStringExtra("result_shake");
+				Log.v("result_shake", result_shake);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		} else if (requestCode == 4) {
+			if (resultCode == RESULT_OK) {
+				String result_touch = data.getStringExtra("result_touch");
+				Log.v("result_touch", result_touch);
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		}
+	}// onActivityResult
+
+	private TimerTask timerTaskGame = new TimerTask() {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			switch (mode) {
 			case 1:
 				gameController.setCurrentModeGame(new OneMode());
-				Log.v("setOneMode","oneMode");
-				mode+=1;
+				Log.v("setOneMode", "oneMode");
+				mode += 1;
 				Intent slidescore = new Intent();
 				slidescore.setClass(CanvasActivity.this, SlideActivity.class);
 				startActivityForResult(slidescore, 1);
 				break;
 			case 2:
 				gameController.setCurrentModeGame(new TwoMode());
-				
-				Log.v("set2","2Mode");
-				//Bundle sendscore = getIntent().getExtras();
-				//int lookscore = sendscore.getInt("lookscore");
-				//Log.v("lookscore",Integer.toString(lookscore));
-				//Toast.makeText(CanvasActivity.this,""+lookscore+"", Toast.LENGTH_SHORT).show();
-				mode+=1;
+
+				Log.v("set2", "2Mode");
+				// Bundle sendscore = getIntent().getExtras();
+				// int lookscore = sendscore.getInt("lookscore");
+				// Log.v("lookscore",Integer.toString(lookscore));
+				// Toast.makeText(CanvasActivity.this,""+lookscore+"",
+				// Toast.LENGTH_SHORT).show();
+				mode += 1;
 				Intent lookscore = new Intent();
 				lookscore.setClass(CanvasActivity.this, LookActivity.class);
 				startActivityForResult(lookscore, 2);
 				break;
 			case 3:
-				Log.v("set3","3Mode");
-				
-//				int shake_times = ShakeActivity.condition;
-//				Log.v(String.valueOf(shake_times), "shake_times");
-				mode+=1;
-				
+				Log.v("set3", "3Mode");
+
+				// int shake_times = ShakeActivity.condition;
+				// Log.v(String.valueOf(shake_times), "shake_times");
+				mode += 1;
+
 				Intent shakescore = new Intent();
 				shakescore.setClass(CanvasActivity.this, ShakeActivity.class);
 				startActivityForResult(shakescore, 3);
 				break;
 			case 4:
-				Log.v("set4","4Mode");
-				mode+=1;
+				Log.v("set4", "4Mode");
+				mode += 1;
 				Intent touch = new Intent();
 				touch.setClass(CanvasActivity.this, TouchActivity.class);
 				startActivityForResult(touch, 4);
-				
+
 				break;
 			case 5:
 				gameController.setCurrentModeGame(new GameOverMode());
-				Log.v("GameOver","GameOver");
+				Log.v("GameOver", "GameOver");
 				timer.cancel();
 				break;
 			default:
-				
+
 				break;
 			}
-			
+
 			gameController.sendHandlerMessage(new Message());
 		}
 	};

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="MediaPlayerService" />
+        <service android:name="howgoyeah.media.MediaPlayerService" />
 
         <activity android:name="howgoyeah.game.CanvasActivity" >
         </activity>
