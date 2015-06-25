@@ -55,10 +55,8 @@ public class MainActivity extends Activity implements Button.OnClickListener {
 		howgo.setOnClickListener(this);
 		allGame.setOnClickListener(this);
 		game_rank.setOnClickListener(this);
-
-		soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 5);
-		soundId = soundPool.load(this, R.raw.background_music, 1);
-		soundPool.play(soundId, 1.0F, 1.0F, 0, 0, 1.0F);
+		getActionBar().hide();
+		
 		intent = new Intent();
 		mediaPlayerService = new MediaPlayerService();
 		intent.setClass(getApplicationContext(), mediaPlayerService.getClass());
