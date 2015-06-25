@@ -21,10 +21,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Point;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,6 +47,7 @@ public class CanvasActivity extends Activity {
 	private Timer timer;
 	private int gasGame = 30000;
 	private int mode = 1;
+	private int point = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +94,7 @@ public class CanvasActivity extends Activity {
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
 				String result_slide = data.getStringExtra("result_slide");
+				point+= Integer.valueOf(result_slide);
 				Log.v("result_slide", result_slide);
 			}
 			if (resultCode == RESULT_CANCELED) {
@@ -99,6 +105,7 @@ public class CanvasActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				String result_look = data.getStringExtra("result_look");
 				Log.v("result_look", result_look);
+				point+= Integer.valueOf(result_look);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -107,6 +114,7 @@ public class CanvasActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				String result_shake = data.getStringExtra("result_shake");
 				Log.v("result_shake", result_shake);
+				point+= Integer.valueOf(result_shake);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -115,6 +123,7 @@ public class CanvasActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				String result_touch = data.getStringExtra("result_touch");
 				Log.v("result_touch", result_touch);
+				point+= Integer.valueOf(result_touch);
 			}
 			if (resultCode == RESULT_CANCELED) {
 				// Write your code if there's no result
@@ -126,9 +135,10 @@ public class CanvasActivity extends Activity {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
+			
 			switch (mode) {
 			case 1:
-				gameController.setCurrentModeGame(new OneMode());
+				
 				Log.v("setOneMode", "oneMode");
 				mode += 1;
 				Intent slidescore = new Intent();
@@ -169,8 +179,8 @@ public class CanvasActivity extends Activity {
 
 				break;
 			case 5:
-				gameController.setCurrentModeGame(new GameOverMode());
-				Log.v("GameOver", "GameOver");
+				
+				canvasHandler.sendMessage(new Message());
 				timer.cancel();
 				break;
 			default:
@@ -178,8 +188,30 @@ public class CanvasActivity extends Activity {
 				break;
 			}
 
-			gameController.sendHandlerMessage(new Message());
 		}
 	};
+	public void resultShow() {
 
+		AlertDialog.Builder builder = new Builder(CanvasActivity.this);
+		builder.setMessage("恭喜你獲得的分數為："+point);
+		builder.setTitle("遊戲結束");
+		builder.setPositiveButton("返回主選單", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				CanvasActivity.this.finish();
+				
+			}
+		});
+		builder.create().show();
+
+	}
+	private Handler canvasHandler = new Handler(){
+	    
+	    @Override
+	    public void handleMessage(Message msg) {
+	        super.handleMessage(msg);
+	        resultShow();
+	    }  
+	};
 }
